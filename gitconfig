@@ -3,7 +3,7 @@
   email = umutsirin1@gmail.com
 
 [alias]
-  st = status -sb
+  st = status
   ci = commit
   co = checkout
   di = diff
@@ -17,3 +17,9 @@
 [github]
   user = usirin
 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
