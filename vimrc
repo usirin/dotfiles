@@ -91,6 +91,12 @@ map <leader>; <c-w>s
 map <leader>` <c-w>v<c-w><c-w>
 map <leader>y :CtrlPBuffer<cr>
 
+" Better split switching
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
 map <leader>kb :NERDTreeToggle<cr>
 map <leader>bi :BundleInstall<cr>
 map <leader>so :so ~/.vimrc<cr>
