@@ -97,6 +97,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+map <leader><Space> :nohlsearch<cr>
+
 map <leader>kb :NERDTreeToggle<cr>
 map <leader>bi :BundleInstall<cr>
 map <leader>so :so ~/.vimrc<cr>
