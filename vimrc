@@ -188,6 +188,10 @@ map <leader>" :Tabularize /"<cr>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" Add new lines before entering insert mode
+nmap <S-Enter> O<Esc>
+nmap <Enter> o<Esc>
+
 " toggle between relative and absolute line numbers
 function! NumberToggle()
   if(&relativenumber == 1)
