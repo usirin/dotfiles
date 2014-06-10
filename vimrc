@@ -88,13 +88,6 @@ if has("gui_macvim")
     " let g:ctrlp_map = '<D-p>'
 
     " Open goto symbol on current buffer
-    nmap <D-r> :MyCtrlPTag<cr>
-    imap <D-r> <esc>:MyCtrlPTag<cr>
-
-    " Open goto symbol on all buffers
-    nmap <D-R> :CtrlPBufTagAll<cr>
-    imap <D-R> <esc>:CtrlPBufTagAll<cr>
-
     " Open goto file
     nmap <D-t> :CtrlP<cr>
     imap <D-t> <esc>:CtrlP<cr>
@@ -165,33 +158,12 @@ map <C-l> <C-W>l
 map <leader>` <c-w>v<c-l>
 map <leader>; <c-w>s<c-j>
 
-let g:ctrlp_cmd = 'CtrlPMRU'                  " search anything (in files, buffers and MRU files at the same time.)
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_height = 10                   " maxiumum height of match window
+let g:ctrlp_max_height=15
 let g:ctrlp_switch_buffer = 'et'              " jump to a file if it's open already
-let g:ctrlp_mruf_max=450                      " number of recently opened files
-let g:ctrlp_max_files=0                       " do not limit the number of searchable files
 let g:ctrlp_use_caching = 1
+let g:ctrlp_max_files=0                       " do not limit the number of searchable files
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-
-func! MyPrtMappings()
-    let g:ctrlp_prompt_mappings = {
-                \ 'AcceptSelection("e")': ['<c-t>'],
-                \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-                \ }
-endfunc
-
-func! MyCtrlPTag()
-    let g:ctrlp_prompt_mappings = {
-                \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-                \ 'AcceptSelection("t")': ['<c-t>'],
-                \ }
-    CtrlPBufTag
-endfunc
-
-let g:ctrlp_buffer_func = { 'exit': 'MyPrtMappings' }
-com! MyCtrlPTag call MyCtrlPTag()
 
 " Open nerdtree in current dir, write our own custom function because
 " NerdTreeToggle just sucks and doesn't work for buffers
