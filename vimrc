@@ -20,6 +20,9 @@ Plugin 'godlygeek/tabular'
 Plugin 'bling/vim-airline'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
+Plugin 'wavded/vim-stylus'
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'reedes/vim-colors-pencil'
 
 call vundle#end()              " required
 filetype plugin indent on      " required
@@ -69,7 +72,9 @@ autocmd BufEnter * silent! lcd %:p:h " set context to current file's directory
 if has("gui_macvim")
     " No toolbars, menu or scrollbars in the GUI
     " set guifont=Source\ Code\ Pro:h13
-    set guifont=Source\ Code\ Pro:h15
+    let g:airline_powerline_fonts = 1
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h15
+    " set guifont=Source\ Code\ Pro:h15
     set clipboard+=unnamed
     set vb t_vb=
     set guioptions-=m  "no menu
@@ -81,7 +86,8 @@ if has("gui_macvim")
 
     let macvim_skip_colorscheme=1
     let g:molokai_original=1
-    colorscheme tomorrow-night
+    colorscheme pencil
+    set background=dark
     highlight SignColumn guibg=#272822
 
     " Open ctrlp with cmd+p
@@ -133,10 +139,9 @@ else
     syntax enable
     set background=dark
 
-    let macvim_skip_colorscheme=1
-    colorscheme tomorrow-night
+    " let macvim_skip_colorscheme=1
+    colorscheme pencil
     highlight SignColumn guibg=#272822
-    highlight VertSplit ctermbg=bg ctermfg=bg
     set t_Co=256
 endif
 
@@ -187,6 +192,9 @@ map <leader>" :Tabularize /"<cr>
 " search will center on the line it's found in.
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+" Map Shift-G to be in the center
+nmap <S-G> <S-G>zz
 
 " Add new lines before entering insert mode
 nmap <S-Enter> O<Esc>
