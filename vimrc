@@ -22,7 +22,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
 Plugin 'wavded/vim-stylus'
 Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'reedes/vim-colors-pencil'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()              " required
 filetype plugin indent on      " required
@@ -86,7 +86,7 @@ if has("gui_macvim")
 
     let macvim_skip_colorscheme=1
     let g:molokai_original=1
-    colorscheme pencil
+    colorscheme base16-ocean
     set background=dark
     highlight SignColumn guibg=#272822
 
@@ -140,7 +140,7 @@ else
     set background=dark
 
     " let macvim_skip_colorscheme=1
-    colorscheme pencil
+    colorscheme base16-ocean
     highlight SignColumn guibg=#272822
     set t_Co=256
 endif
