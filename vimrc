@@ -140,8 +140,8 @@ else
     syntax enable
     set background=dark
 
-    " let macvim_skip_colorscheme=1
-    colorscheme base16-ocean
+    colorscheme Tomorrow-Night
+    let base16colorspace=256
     highlight SignColumn guibg=#272822
     set t_Co=256
 endif
