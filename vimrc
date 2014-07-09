@@ -23,6 +23,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'wavded/vim-stylus'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'chriskempson/base16-vim'
+Plugin 'wesQ3/vim-windowswap'
 
 call vundle#end()              " required
 filetype plugin indent on      " required
