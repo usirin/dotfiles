@@ -20,6 +20,7 @@ alias gs='git status'
 alias glog="git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
 alias r40="rvm gemset use rails4.0"
 alias rize="cd ~/ruby/rails/randomize"
+alias ctags="`brew --prefix`/bin/ctags"
 
 # functions
 gdiff() { git diff --color "$@" }
