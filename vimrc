@@ -24,6 +24,8 @@ Plugin 'wavded/vim-stylus'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'wesQ3/vim-windowswap'
+Plugin 'lukaszkorecki/CoffeeTags'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()              " required
 filetype plugin indent on      " required
@@ -64,6 +66,10 @@ set list listchars=tab:\ \ ,trail:· " highlight tailing whitespace
 set expandtab
 set tabstop=2
 set shiftwidth=2
+
+" Different tab-space styles for different languages
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab " CoffeeScript
+autocmd BufNewFile,BufReadPost *.js     setl shiftwidth=2 expandtab " JavaScript
 
 " lets make sure we don't show these files
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
@@ -164,6 +170,12 @@ map <C-l> <C-W>l
 map <leader>` <c-w>v<c-l>
 map <leader>; <c-w>s<c-j>
 
+" CoffeeTags https://github.com/lukaszkorecki/CoffeeTags
+" ctag support for coffeescript
+" `gem install CoffeeTags`
+let g:CoffeeAutoTagIncludeVars=1              " so that it will include Classes as well
+
+" ctrlp configs
 let g:ctrlp_max_height=15
 let g:ctrlp_switch_buffer = 'et'              " jump to a file if it's open already
 let g:ctrlp_use_caching = 1
