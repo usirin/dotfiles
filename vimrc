@@ -24,7 +24,6 @@ Plugin 'wavded/vim-stylus'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'wesQ3/vim-windowswap'
-Plugin 'lukaszkorecki/CoffeeTags'
 Plugin 'majutsushi/tagbar'
 
 call vundle#end()              " required
@@ -169,11 +168,6 @@ map <C-l> <C-W>l
 " Better split opening
 map <leader>` <c-w>v<c-l>
 map <leader>; <c-w>s<c-j>
-
-" CoffeeTags https://github.com/lukaszkorecki/CoffeeTags
-" ctag support for coffeescript
-" `gem install CoffeeTags`
-let g:CoffeeAutoTagIncludeVars=1              " so that it will include Classes as well
 
 " ctrlp configs
 let g:ctrlp_max_height=15
