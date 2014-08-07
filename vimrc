@@ -25,6 +25,8 @@ Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'wesQ3/vim-windowswap'
 Plugin 'majutsushi/tagbar'
+Plugin 'rking/ag.vim'
+Plugin 'fatih/vim-go'
 
 call vundle#end()              " required
 filetype plugin indent on      " required
@@ -79,7 +81,7 @@ if has("gui_macvim")
     " No toolbars, menu or scrollbars in the GUI
     " set guifont=Source\ Code\ Pro:h13
     let g:airline_powerline_fonts = 1
-    set guifont=Source\ Code\ Pro\ for\ Powerline:h15
+    set guifont=Source\ Code\ Pro\ for\ Powerline:h17
     " set guifont=Source\ Code\ Pro:h15
     set clipboard+=unnamed
     set vb t_vb=
@@ -92,7 +94,7 @@ if has("gui_macvim")
 
     let macvim_skip_colorscheme=1
     let g:molokai_original=1
-    colorscheme base16-ocean
+    colorscheme Tomorrow-Night-Eighties
     set background=dark
     highlight SignColumn guibg=#272822
 
@@ -157,7 +159,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 let mapleader=","
 let g:mapleader=","
 
-nnoremap <leader><space> :nohlsearch<cr> " Remove search highlight
+" Remove search highlight
+nnoremap <leader><space> :nohlsearch<cr>
+
+" Use space for space in normal mode
+nmap <space> a<space><esc>
 
 " Better split switching
 map <C-j> <C-W>j
