@@ -81,7 +81,9 @@ if has("gui_macvim")
     " No toolbars, menu or scrollbars in the GUI
     " set guifont=Source\ Code\ Pro:h13
     let g:airline_powerline_fonts = 1
-    set guifont=Source\ Code\ Pro\ for\ Powerline:h17
+    set guifont=InputMono\ Light\ For\ Powerline:h16
+    " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h17
+    " set guifont=Source\ Code\ Pro\ for\ Powerline:h17
     " set guifont=Source\ Code\ Pro:h15
     set clipboard+=unnamed
     set vb t_vb=
