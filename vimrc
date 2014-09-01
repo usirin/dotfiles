@@ -164,7 +164,7 @@ let g:mapleader=","
 nnoremap <leader><space> :nohlsearch<cr>
 
 " Use space for space in normal mode
-nmap <space> a<space><esc>
+nmap <space> i<space><esc>l
 
 " Better split switching
 map <C-j> <C-W>j
