@@ -96,7 +96,7 @@ if has("gui_macvim")
 
     let macvim_skip_colorscheme=1
     let g:molokai_original=1
-    colorscheme Tomorrow-Night-Eighties
+    colorscheme base16-eighties
     set background=dark
     highlight SignColumn guibg=#272822
 
@@ -150,7 +150,6 @@ else
     set background=dark
 
     colorscheme Tomorrow-Night
-    let base16colorspace=256
     highlight SignColumn guibg=#272822
     set t_Co=256
 endif
