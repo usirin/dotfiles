@@ -5,12 +5,16 @@
 [alias]
   st = status
   ci = commit
+  ane = commit --amend --no-edit
   co = checkout
   di = diff
   aa = add --all
   b  = branch
   bd = branch -D
   logo = log --decorate --oneline
+  rc = rebase --continue
+  ra = rebase --abort
+  ri = rebase --interactive
 
 [core]
   editor = vim
@@ -22,7 +26,7 @@
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
