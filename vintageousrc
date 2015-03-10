@@ -1,0 +1,13 @@
+:let mapleader=,
+:map <Leader>p <C-p>
+:map <Leader>` <c-w>v<c-w>l
+:map <Leader>; <c-w>s<c-w>j
+
+:map <c-j> <C-w>j
+:map <c-k> <C-w>k
+:map <c-h> <C-w>h
+:map <c-l> <C-w>l
+
+:map n nzzzv
+:map N Nzzzv
+
