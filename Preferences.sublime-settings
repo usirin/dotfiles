@@ -1,0 +1,29 @@
+{
+	"caret_style": "solid",
+	"color_scheme": "Packages/Theme - Spacegray/base16-eighties.dark.tmTheme",
+	"draw_white_space": "all",
+	"file_exclude_patterns": [
+		"*.pyc", "*.pyo", "*.exe", "*.dll", "*.obj", "*.o", "*.a", "*.lib", "*.so",
+		"*.dylib", "*.ncb", "*.sdf", "*.suo", "*.pdb", "*.idb", ".DS_Store", "*.class",
+		"*.psd", "*.db", "*.sublime-workspace", "*.orig", "*.map", "__*.js", "__*.css"
+	],
+	"folder_exclude_patterns": [
+		".svn", ".git", ".hg", "CVS", ".build", ".vagrant", "node_modules"
+	],
+	"font_face": "InputMono Light For Powerline",
+	"font_size": 17.0,
+	"highlight_line": true,
+	"ignored_packages": [
+		"Theme - Flatland", "AAAPackageDev", "Vintage"
+	],
+	"line_padding_bottom": 6,
+	"line_padding_top": 6,
+	"rulers": [
+		78, 100
+	],
+	"scroll_past_end": true,
+	"tab_size": 2,
+	"theme": "Spacegray Eighties.sublime-theme",
+	"translate_tabs_to_space": true,
+	"trim_trailing_white_space_on_save": true
+}
