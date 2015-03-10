@@ -5,7 +5,7 @@
 [alias]
   st = status
   ci = commit
-  ane = commit --amend --no-edit
+  cian = commit --amend --no-edit
   co = checkout
   di = diff
   aa = add --all
@@ -15,6 +15,7 @@
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
+  pr = pull --rebase
 
 [core]
   editor = vim
@@ -32,3 +33,5 @@
 	trustExitCode = true
 [mergetool]
 	keepBackup = true
+[push]
+	default = simple
