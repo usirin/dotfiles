@@ -21,7 +21,7 @@ alias glog="git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
 alias r40="rvm gemset use rails4.0"
 alias rize="cd ~/ruby/rails/randomize"
 alias ctags="`brew --prefix`/bin/ctags"
-
+alias build-landing="gulp build --outputDir=/Users/usirin/koding/newkoding/website/a/site.landing/"
 # functions
 gdiff() { git diff --color "$@" }
 
@@ -38,10 +38,15 @@ source $ZSH/oh-my-zsh.sh
 # GOPATH exportation
 export GOPATH=$HOME/gocode
 
+export EDITOR=vim
+
 # Customize to your needs...
 export PATH=/Applications/Postgres93.app/Contents/MacOS/bin:$PATH:/usr/bin:/bin:/usr/sbin:/sbin
 
 PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 PATH=$PATH:$HOME/gocode/bin
-
+# Base16 Shell
+# BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# sh /Users/usirin/.config/base16-shell/base16-default.dark.sh

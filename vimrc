@@ -32,6 +32,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mtscout6/vim-cjsx'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'reedes/vim-colors-pencil'
 
 
 call vundle#end()              " required
@@ -92,8 +93,10 @@ set timeout timeoutlen=500 ttimeoutlen=1
 " set t_Co=256
 " let &t_Co=256
 let &t_Co=16
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme pencil
+
+let g:airline_theme = 'pencil'
 
 " set color column to lighter grey
 hi ColorColumn ctermbg=7
@@ -137,6 +140,9 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" map jj to Esc
+imap jj <Esc>
 
 " Better split opening
 " map <leader>` <c-w>v<c-l>
@@ -195,10 +201,6 @@ nnoremap N Nzzzv
 " Map Shift-G to be in the center
 nmap <S-G> <S-G>zz
 
-" Add new lines before entering insert mode
-nmap <Enter> o<Esc>
-nmap <c-cr> O<cr><Esc>
-
 " toggle between relative and absolute line numbers
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -218,6 +220,10 @@ try
   set undofile
 catch
 endtry
+
+" Add new lines before entering insert mode
+nnoremap <Enter> o<Esc>
+nnoremap <c-cr> O<cr><Esc>
 
 
 " MACROS
