@@ -33,7 +33,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'mtscout6/vim-cjsx'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'reedes/vim-colors-pencil'
-
+Plugin 'yosiat/oceanic-next-vim'
+Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plugin 'whatyouhide/vim-gotham'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'dbakker/vim-projectroot'
 
 call vundle#end()              " required
 filetype plugin indent on      " required
@@ -59,6 +63,9 @@ set laststatus=2               " Always show status bar
 set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
 
 set fileformats=unix,dos,mac   " Prefer Unix over Windows over OS 9 formats
+
+" control with mouse ~will probably turn off
+set mouse=a
 
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 " set clipboard^=unnamed
@@ -93,15 +100,15 @@ syntax enable
 set timeout timeoutlen=500 ttimeoutlen=1
 
 " set t_Co=256
-" let &t_Co=256
-let &t_Co=16
+let &t_Co=256
+" let &t_Co=16
+colorscheme gotham
 set background=dark
-colorscheme pencil
 
-let g:airline_theme = 'pencil'
+let coffee_compiler = '/usr/local/bin/cjsx'
 
 " set color column to lighter grey
-hi ColorColumn ctermbg=7
+hi ColorColumn ctermbg=236
 
 " show only underline for search highlights
 hi Search ctermbg=NONE ctermfg=NONE cterm=underline
@@ -111,6 +118,7 @@ hi clear SignColumn
 hi SignColumn ctermfg=none ctermbg=none
 
 autocmd BufNewFile,BufReadPost *.coffee setl colorcolumn=80
+autocmd BufNewFile,BufReadPost *.styl setl colorcolumn=28
 
 " remove whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -122,6 +130,9 @@ nnoremap ; :
 
 " Remove search highlight
 nnoremap <leader><space> :nohlsearch<cr>
+
+" Ag the word under cursor
+nnoremap <leader>f :Ag "<C-R><C-W>"<cr>
 
 " Shortcut for :b#
 nnoremap <leader><leader> <c-^>
@@ -167,6 +178,16 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_max_files=0                       " do not limit the number of searchable files
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+
+" CtrlSF bindings
+nmap     <C-F>f <Plug>CtrlSFPrompt
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
 function! g:NerdTreeFindToggle()
     if nerdtree#isTreeOpen()
@@ -226,6 +247,10 @@ endtry
 " Add new lines before entering insert mode
 nnoremap <Enter> o<Esc>
 nnoremap <c-cr> O<cr><Esc>
+
+if has("gui_macvim")
+  set guifont=InputMono\ Light\ for\ Powerline:h14
+endif
 
 
 " MACROS
