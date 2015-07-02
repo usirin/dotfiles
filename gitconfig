@@ -16,6 +16,7 @@
   ra = rebase --abort
   ri = rebase --interactive
   pr = pull --rebase
+  g = grep --break --heading --line-number
 
 [core]
   editor = vim
