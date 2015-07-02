@@ -78,6 +78,8 @@ set tabstop=2
 set smarttab
 set shiftwidth=2
 
+set scrolloff=5
+
 " Different tab-space styles for different languages
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab " CoffeeScript
 autocmd BufNewFile,BufReadPost *.js     setl shiftwidth=2 expandtab " JavaScript
