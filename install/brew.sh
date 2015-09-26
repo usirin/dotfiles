@@ -8,6 +8,8 @@ fi
 
 echo "Installing homebrew packages..."
 
+brew install zsh
+
 brew install ag
 brew install ack
 brew install tree
