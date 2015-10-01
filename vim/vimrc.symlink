@@ -1,46 +1,52 @@
-set nocompatible
-filetype off
+if 0 | endif
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if has('vim_starting')
+  if &compatible
+    set nocompatible
+    filetype off
+  endif
 
-Plugin 'gmarik/Vundle.vim'
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-commentary.git'
-Plugin 'tpope/vim-surround'
-Plugin 'jlangston/tomorrow-night-vim'
-Plugin 'godlygeek/tabular'
-Plugin 'bling/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Raimondi/delimitMate'
-Plugin 'wavded/vim-stylus'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'wesQ3/vim-windowswap'
-Plugin 'majutsushi/tagbar'
-Plugin 'derekwyatt/ag.vim'
-Plugin 'fatih/vim-go'
-Plugin 'duythinht/vim-coffee'
-Plugin 'quanganhdo/grb256'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'mtscout6/vim-cjsx'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'reedes/vim-colors-pencil'
-Plugin 'yosiat/oceanic-next-vim'
-Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'dbakker/vim-projectroot'
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-call vundle#end()              " required
-filetype plugin indent on      " required
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tpope/vim-commentary.git'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'wavded/vim-stylus'
+NeoBundle 'AndrewRadev/splitjoin.vim'
+NeoBundle 'wesQ3/vim-windowswap'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'derekwyatt/ag.vim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'duythinht/vim-coffee'
+NeoBundle 'Chiel92/vim-autoformat'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'mtscout6/vim-cjsx'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'whatyouhide/vim-gotham'
+NeoBundle 'dyng/ctrlsf.vim'
+NeoBundle 'dbakker/vim-projectroot'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'lukaszkorecki/CoffeeTags'
+
+call neobundle#end()
+filetype plugin indent on
+
+NeoBundleCheck
 
 syntax enable
 
@@ -80,6 +86,8 @@ set smartcase                       " ... but not when search pattern contains u
 set ttyfast
 set list listchars=tab:\ \ ,trail:·,nbsp:· " highlight tailing whitespace
 
+set nowrap
+
 set expandtab
 set tabstop=2
 set smarttab
@@ -105,7 +113,10 @@ let &t_Co=256
 colorscheme gotham
 set background=dark
 
-let coffee_compiler = '/usr/local/bin/cjsx'
+let coffee_compiler = '~/.nvm/v0.10.40/bin/cjsx'
+
+let g:CoffeeAutoTagIncludeVars=0
+let g:CoffeeAutoTagTagRelative=0
 
 " set color column to lighter grey
 hi ColorColumn ctermbg=236
@@ -127,6 +138,8 @@ let mapleader=","
 
 " map ; to : for normal mode
 nnoremap ; :
+
+nnoremap <leader>h :%s/<?=/<?php echo /g<cr>
 
 " Remove search highlight
 nnoremap <leader><space> :nohlsearch<cr>
@@ -189,16 +202,16 @@ nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
-function! g:NerdTreeFindToggle()
+function! g:NERDTreeFindToggle()
     if nerdtree#isTreeOpen()
         exec 'NERDTreeClose'
     else
         exec 'NERDTreeFind'
     endif
 endfunction
-noremap <leader>kb :<C-u>call g:NerdTreeFindToggle()<cr>
+noremap <leader>kb :NERDTreeToggle<cr>
 
-map <leader>pi :PluginInstall<cr>
+map <leader>pi :NeoBundleInstall<cr>
 
 map <leader>j :!npm test<cr>
 
@@ -233,7 +246,7 @@ function! NumberToggle()
     set relativenumber
   endif
 endfunc
-map <C-M> :call NumberToggle()<cr>
+nnoremap <C-\> :call NumberToggle()<cr>
 
 let g:airline_powerline_fonts=1
 
@@ -252,6 +265,13 @@ if has("gui_macvim")
   set guifont=InputMono\ Light\ for\ Powerline:h14
 endif
 
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+else
+    let &t_SI = "\e[5 q"
+    let &t_EI = "\e[2 q"
+endif
 
 " MACROS
 
