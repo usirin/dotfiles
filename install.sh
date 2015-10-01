@@ -13,9 +13,8 @@ if [ "$(uname)" == "Darwin" ]; then
 
   echo ">>> homebrew-cask"
   source install/brew-cask.sh
-
-  echo ""
-
 fi
+
+echo "Done!"
 
 
