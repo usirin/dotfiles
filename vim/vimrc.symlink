@@ -211,6 +211,8 @@ function! g:NERDTreeFindToggle()
 endfunction
 noremap <leader>kb :NERDTreeToggle<cr>
 
+let NERDTreeIgnore=['\.o$', '\~$', 'tags$']
+
 map <leader>pi :NeoBundleInstall<cr>
 
 map <leader>j :!npm test<cr>
