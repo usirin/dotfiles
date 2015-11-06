@@ -13,6 +13,11 @@ if [ "$(uname)" == "Darwin" ]; then
 
   echo ">>> homebrew-cask"
   source install/brew-cask.sh
+else
+  echo "Running on Ubuntu"
+
+  echo ">>> apt-get"
+  source install/apt-get.sh
 fi
 
 echo "Installing oh-my-zsh"
