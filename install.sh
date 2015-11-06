@@ -15,6 +15,8 @@ if [ "$(uname)" == "Darwin" ]; then
   source install/brew-cask.sh
 fi
 
+echo "Installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 echo "Done!"
 
 
