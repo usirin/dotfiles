@@ -64,6 +64,8 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# export boot2docker variables
-eval "$(boot2docker shellinit)"
+if [[ `uname` == 'Darwin' ]]; then
+  # export boot2docker variables
+  eval "$(boot2docker shellinit)"
+fi
 
