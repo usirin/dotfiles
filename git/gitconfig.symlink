@@ -20,8 +20,7 @@
 
 [core]
   editor = vim
-  excludesfiles = /Users/usirin/.gitignore_global
-	excludesfile = /Users/umut/.gitignore
+	excludesfile = ~/.gitignore
 
 [github]
   user = usirin
