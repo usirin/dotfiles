@@ -6,6 +6,9 @@ if test ! $(which brew-cask); then
     brew install caskroom/cask/brew-cask
 fi
 
+# tap `versions` repo to get alternate versions.
+brew tap caskroom/versions
+
 echo "Installing homebrew-cask packages..."
 
 brew-cask install virtualbox
