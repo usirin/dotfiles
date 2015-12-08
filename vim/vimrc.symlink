@@ -198,9 +198,9 @@ vmap     <C-F>f <Plug>CtrlSFVwordPath
 vmap     <C-F>F <Plug>CtrlSFVwordExec
 nmap     <C-F>n <Plug>CtrlSFCwordPath
 nmap     <C-F>p <Plug>CtrlSFPwordPath
-nnoremap <C-F>o :CtrlSFOpen<CR>
-nnoremap <C-F>t :CtrlSFToggle<CR>
-inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+nnoremap <C-F>o :CtrlSFOpen<cr>
+nnoremap <C-F>t :CtrlSFToggle<cr>
+inoremap <C-F>t <Esc>:CtrlSFToggle<cr>
 
 function! g:NERDTreeFindToggle()
     if nerdtree#isTreeOpen()
