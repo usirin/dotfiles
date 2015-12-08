@@ -24,6 +24,7 @@ brew install macvim --override-system-vim --with-cscope --with-lua
 brew linkapps macvim
 brew install reattach-to-user-namespace
 brew install tmux
+brew install unrar
 
 brew install node
 brew install golang
