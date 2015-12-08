@@ -20,7 +20,8 @@ brew install tig
 
 brew install git
 brew install hub
-brew install macvim --override-system-vim
+brew install macvim --override-system-vim --with-cscope --with-lua
+brew linkapps macvim
 brew install reattach-to-user-namespace
 brew install tmux
 
