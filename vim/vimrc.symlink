@@ -133,6 +133,8 @@ let coffee_compiler = '~/.nvm/v0.10.40/bin/cjsx'
 let g:CoffeeAutoTagIncludeVars=0
 let g:CoffeeAutoTagTagRelative=0
 
+let g:vimroom_background='black'
+
 " set color column to lighter grey
 hi ColorColumn ctermbg=236
 
