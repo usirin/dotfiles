@@ -120,10 +120,12 @@ autocmd BufEnter * silent! lcd %:p:h " set context to current file's directory
 syntax enable
 set timeout timeoutlen=500 ttimeoutlen=1
 
-" set t_Co=256
-let &t_Co=256
+
+
+set t_Co=256
+" let &t_Co=256
 " let &t_Co=16
-colorscheme gotham
+colorscheme gruvbox
 set background=dark
 
 let coffee_compiler = '~/.nvm/v0.10.40/bin/cjsx'
