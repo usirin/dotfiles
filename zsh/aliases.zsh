@@ -16,3 +16,6 @@ alias ....='cd ../../..'
 # file listing aliases
 alias l="ls -lahF ${colorflag}"
 
+# using supervisorctl like crazy so assign it to `s`
+alias s='supervisorctl'
+
