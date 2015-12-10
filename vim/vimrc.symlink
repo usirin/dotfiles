@@ -139,24 +139,28 @@ let mapleader=","
 " map ; to : for normal mode
 nnoremap ; :
 
-nnoremap <leader>h :%s/<?=/<?php echo /g<cr>
+" toggle VimRoom
+nnoremap <silent> <Leader>mz <Plug>VimroomToggle
 
 " Remove search highlight
 nnoremap <leader><space> :nohlsearch<cr>
 
-" Ag the word under cursor
-nnoremap <leader>f :Ag "<C-R><C-W>"<cr>
+" Awesome CTRJSF maps
+nnoremap <C-F>f :echo yo
 
 " Shortcut for :b#
 nnoremap <leader><leader> <c-^>
+
+" open todo.txt in a vertical split
+nnoremap <leader>t :vs ~/todo.txt<cr>
 
 
 nmap <leader>a gcc
 vmap <leader>a gc
 
 " Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :vs $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>ev :vs $MYVIMRC<cr>
+nmap <silent> <leader>sv :so $MYVIMRC<cr>
 
 " Use space for space in normal mode
 nmap <space> i<space><esc>l
