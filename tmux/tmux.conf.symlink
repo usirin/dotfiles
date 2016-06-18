@@ -126,6 +126,8 @@ source ~/dotfiles/tmux/theme-2016.sh
 # Tmux Plugin Manager list of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-sessionist'
+set -g @plugin 'tmux-plugins/tmux-continuum'
 
 # Tmux Plugin settings
 
