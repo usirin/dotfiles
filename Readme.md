@@ -9,9 +9,8 @@ If you wanna try, follow instructions to install.
 ### install
 
 ```bash
-cd ~
-git clone git@github.com:usirin/dotfiles.git
-cd dotfiles
+git clone git@github.com:usirin/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 source install.sh
 ```
 
