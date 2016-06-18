@@ -13,9 +13,13 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+alias vim='/usr/local/Cellar/macvim/7.4-81/bin/vim'
+alias vi=vim
+
 # file listing aliases
 alias l="ls -lahF ${colorflag}"
 
 # using supervisorctl like crazy so assign it to `s`
 alias s='supervisorctl'
+
 
