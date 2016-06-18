@@ -28,7 +28,6 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'wavded/vim-stylus'
 NeoBundle 'AndrewRadev/splitjoin.vim'
 NeoBundle 'wesQ3/vim-windowswap'
-NeoBundle 'majutsushi/tagbar'
 NeoBundle 'derekwyatt/ag.vim'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'duythinht/vim-coffee'
@@ -36,25 +35,38 @@ NeoBundle 'Chiel92/vim-autoformat'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'mtscout6/vim-cjsx'
-NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'dyng/ctrlsf.vim'
 NeoBundle 'dbakker/vim-projectroot'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'lukaszkorecki/CoffeeTags'
-NeoBundle 'jordwalke/flatlandia'
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'heavenshell/vim-jsdoc'
 NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'heavenshell/vim-jsdoc'
 NeoBundle 'freitass/todo.txt-vim'
-NeoBundle 'mikewest/vimroom'
 NeoBundle 'jtratner/vim-flavored-markdown'
 NeoBundle 'tpope/vim-obsession'
+NeoBundle 'zhaocai/GoldenView.Vim'
+NeoBundle 'vim-scripts/MPage'
+NeoBundle 'afshinm/npm.vim'
+NeoBundle 'kylef/apiblueprint.vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+
 
 call neobundle#end()
 filetype plugin indent on
@@ -80,6 +92,8 @@ set autowrite                  " Automatically save before :next, :make etc.
 set autoread                   " Automatically reread changed files without asking me anything
 set laststatus=2               " Always show status bar
 set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
+
+set wildmenu
 
 set fileformats=unix,dos,mac   " Prefer Unix over Windows over OS 9 formats
 
@@ -125,8 +139,10 @@ set timeout timeoutlen=500 ttimeoutlen=1
 set t_Co=256
 " let &t_Co=256
 " let &t_Co=16
-colorscheme gruvbox
-set background=dark
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 0 " Remove this line if using the default palette.
+set bg=dark
+colorscheme hybrid
 
 let coffee_compiler = '~/.nvm/v0.10.40/bin/cjsx'
 
@@ -146,6 +162,15 @@ let g:jsdoc_access_descriptions=2
 let g:jsdoc_underscore_private=1
 let g:jsdoc_param_description_separator=' - '
 let g:jsdoc_enable_es6=1
+
+" Goldenview settings
+let g:goldenview__enable_default_mapping = 0
+
+" gist-vim settings
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+let g:gist_show_privates = 1
+let g:gist_post_private = 1
 
 
 " set color column to lighter grey
@@ -168,6 +193,10 @@ let mapleader=","
 
 " map ; to : for normal mode
 nnoremap ; :
+
+nnoremap <Leader>ww <Plug>VimwikiIndex
+
+nnoremap <Leader>ef :MPage 2<cr>
 
 " toggle VimRoom
 nnoremap <silent> <Leader>mz <Plug>VimroomToggle
@@ -193,7 +222,7 @@ nmap <silent> <leader>ev :vs $MYVIMRC<cr>
 nmap <silent> <leader>sv :so $MYVIMRC<cr>
 
 " Use space for space in normal mode
-nmap <space> i<space><esc>l
+nmap <space> i<space><C-c>l
 
 " Better split switching
 map <C-j> <C-W>j
@@ -201,8 +230,12 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" map jj to Esc
-imap jj <Esc>
+" Map Esc to nop in insert mode so get used to `jj` combo
+inoremap <esc> <nop>
+
+" map jj to Esc (<C-c> is another way of exiting instert mode)
+imap jj <C-c>
+
 
 " Better split opening
 " map <leader>` <c-w>v<c-l>
@@ -232,7 +265,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 " CtrlSF bindings
-nmap     <C-F>f <Plug>CtrlSFPrompt
+nmap     <C-F>f :ProjectRootExe CtrlSF<space>
 vmap     <C-F>f <Plug>CtrlSFVwordPath
 vmap     <C-F>F <Plug>CtrlSFVwordExec
 nmap     <C-F>n <Plug>CtrlSFCwordPath
@@ -241,13 +274,6 @@ nnoremap <C-F>o :CtrlSFOpen<cr>
 nnoremap <C-F>t :CtrlSFToggle<cr>
 inoremap <C-F>t <Esc>:CtrlSFToggle<cr>
 
-function! g:NERDTreeFindToggle()
-    if nerdtree#isTreeOpen()
-        exec 'NERDTreeClose'
-    else
-        exec 'NERDTreeFind'
-    endif
-endfunction
 noremap <leader>kb :NERDTreeToggle<cr>
 
 let NERDTreeIgnore=['\.o$', '\~$', 'tags$']
@@ -317,8 +343,21 @@ endif
 " MACROS
 
 " Add markdox definition to method. Just placeholder.
-let @m = 'O€kb###* *€kb###kA '
+let @m = 'O€kb###* *€kb###'
 
 let @a = 'O€kb###o€kb *o€kb***€kb€kb€kb###kkA*jA '
 
 let @c = 'ireturn callback err  if err'
+
+function! s:get_visual_selection()
+  " Why is this not a built-in Vim script function?!
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
+vmap <leader> :call s:get_visual_selection()<cr>
+
