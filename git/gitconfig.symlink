@@ -9,7 +9,7 @@
   co = checkout
   di = diff
   aa = add --all
-  b  = branch
+  b  = branch -vv
   bd = branch -D
   logo = log --decorate --oneline
   rc = rebase --continue
@@ -17,6 +17,8 @@
   ri = rebase --interactive
   pr = pull --rebase
   g = grep --break --heading --line-number
+  url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
+  open =! bash -c 'git url | xargs open'
 
 [core]
   editor = vim
