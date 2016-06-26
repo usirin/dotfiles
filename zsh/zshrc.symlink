@@ -26,6 +26,9 @@ export EDITOR='vim'
 
 export PATH=/usr/local/bin:$PATH
 
+# add go14 as go to the path
+export PATH=$PATH:/usr/local/opt/go14/libexec/bin
+
 # add /usr/local/sbin
 if [[ -d /usr/local/sbin ]]; then
     export PATH=/usr/local/sbin:$PATH

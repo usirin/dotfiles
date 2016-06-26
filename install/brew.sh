@@ -35,4 +35,9 @@ brew install mongodb
 brew install nginx
 brew install postgresql
 
-exit 0
+brew install gnupg
+
+echo "installing neovim..."
+brew tap neovim/neovim
+brew install --HEAD neovim
+

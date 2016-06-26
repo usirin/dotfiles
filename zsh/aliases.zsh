@@ -13,7 +13,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-alias vim='/usr/local/Cellar/macvim/7.4-81/bin/vim'
+alias vim='/usr/local/Cellar/macvim/7.4-104/bin/vim'
 alias vi=vim
 
 # file listing aliases
