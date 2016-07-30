@@ -26,6 +26,10 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 echo "Installing Tmux Plugin Manager"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+echo "Installing Powerline Fonts"
+git clone https://github.com/powerline/fonts.git /tmp/powerline-fonts
+/tmp/powerline-fonts/install.sh
+
 echo "Configuring zsh as default shell"
 chsh -s $(which zsh)
 
