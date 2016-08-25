@@ -23,7 +23,7 @@ set -g visual-activity off
 # Rather than constraining window size to the maximum size of any client
 # connected to the *session*, constrain window size to the maximum size of any
 # client connected to *that window*. Much more reasonable.
-setw -g aggressive-resize on
+setw -g aggressive-resize off
 
 # make delay shorter
 set -sg escape-time 0
@@ -89,9 +89,9 @@ bind -r L resize-pane -R 10
 
 setw -g mouse
 
-# # make scrolling with wheels work
-# bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
-# bind -n WheelDownPane select-pane -t= \; send-keys -M
+# make scrolling with wheels work
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
 
 # use control to scroll faster
 bind -n C-WheelUpPane select-pane -t= \; copy-mode -e \; send-keys -M
@@ -117,17 +117,23 @@ bind -t vi-copy 'y' copy-selection
 bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-buffer"
 
+
 ##############################
 ### Color & Style Settings ###
 ##############################
 
 source ~/dotfiles/tmux/theme-2016.sh
 
+# so that nvim can show pipe in insert mode as cursor shape.
+set -g -a terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+
+
 # Tmux Plugin Manager list of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-sessionist'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-battery'
 
 # Tmux Plugin settings
 

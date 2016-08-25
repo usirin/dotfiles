@@ -27,8 +27,8 @@ setw -g mode-fg colour0
 # window status
 setw -g window-status-format " #F#I:#W#F "
 setw -g window-status-current-format " #F#I:#W#F "
-setw -g window-status-format "#[fg=magenta]#[bg=black] #I #[bg=cyan]#[fg=colour8] #W "
-setw -g window-status-current-format "#[bg=brightmagenta]#[fg=colour8] #I #[fg=colour8]#[bg=colour14] #W "
+setw -g window-status-format "#[fg=yellow]#[bg=black] #I #[bg=cyan]#[fg=colour8] #W "
+setw -g window-status-current-format "#[bg=brightyellow]#[fg=colour8] #I #[fg=colour8]#[bg=colour14] #W "
 setw -g window-status-current-bg colour0
 setw -g window-status-current-fg colour11
 setw -g window-status-current-attr dim
@@ -66,24 +66,16 @@ set -g pane-active-border-fg colour51
 # The statusbar {
 
 tm_icon="♟"
-tm_separator_right_thin="❯"
-tm_separator_left_thin="❮"
+tm_separator_right_thin=" ❯"
+tm_separator_left_thin="❮ "
 tm_color_music=white
-tm_color_feature=colour5
-tm_battery="#[fg=white,bg=colour240,bold] ⚡️ #{battery_percentage} "
+tm_color_feature=yellow
+tm_battery="#[fg=white,bg=colour240,bold] #{battery_percentage} "
 tm_date="#[fg=white,bg=colour242,bold] %m/%d/%Y #[fg=white,bg=colour244,bold] %H:%M:%S"
 tm_spotify="#[fg=$tm_color_music,bg=colour246,bold]#(osascript ~/dotfiles/osx/spotify.scpt)"
 tm_session_name="#[fg=$tm_color_feature,bold]$tm_separator_right_thin #S $tm_separator_left_thin"
 
-set -g status-position bottom
-set -g status-bg colour238
-set -g status-fg colour137
-set -g status-attr dim
-set -g status-left $tm_session_name
-set -g status-right $tm_battery' '$tm_date' '$tm_spotify
-set -g status-right-length 100
-set -g status-left-length 20
-
+umut_battery_perc="#(pmset -g batt | awk 'NR==2 { gsub(/;/,""); print $2 }')"
 setw -g window-status-current-fg colour81
 setw -g window-status-current-bg colour238
 setw -g window-status-current-attr bold
@@ -106,3 +98,14 @@ set -g message-fg white
 set -g message-bg colour238
 
 # }
+
+set -g status-position bottom
+set -g status-bg colour238
+set -g status-fg colour137
+set -g status-attr dim
+set -g status-left $tm_session_name
+set -g status-right '#{battery_percentage} #{battery_icon} | %A | %h-%d | %H:%M '
+# set -g status-right $tm_battery'|'$tm_date' '$tm_spotify
+# set -g status-right-length 100
+set -g status-left-length 20
+
