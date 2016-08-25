@@ -22,12 +22,12 @@ fi
 autoload -U compinit
 compinit
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 export PATH=/usr/local/bin:$PATH
 
-# add go14 as go to the path
-export PATH=$PATH:/usr/local/opt/go14/libexec/bin
+# # add go14 as go to the path
+# export PATH=$PATH:/usr/local/opt/go14/libexec/bin
 
 # add /usr/local/sbin
 if [[ -d /usr/local/sbin ]]; then
@@ -37,6 +37,10 @@ fi
 # add golang to path
 if [[ -d $HOME/gocode/bin ]]; then
     export PATH=$PATH:$HOME/gocode/bin
+fi
+
+if [[ -d /usr/local/go/bin ]]; then
+    export PATH=$PATH:/usr/local/go/bin
 fi
 
 # adding path directory for custom scripts
@@ -72,3 +76,12 @@ if [[ `uname` == 'Darwin' ]]; then
   eval "$(boot2docker shellinit)"
 fi
 
+[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
+if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
+  export GPG_AGENT_INFO
+else
+  eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+fi
+
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
