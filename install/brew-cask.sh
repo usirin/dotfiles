@@ -20,3 +20,7 @@ brew cask install 1password
 brew cask install moom
 brew cask install spotify
 
+brew cask install adobe-creative-cloud
+brew cask install gpgtools
+brew cask install robomongo
+brew cask install sketch

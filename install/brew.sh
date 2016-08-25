@@ -41,3 +41,5 @@ echo "installing neovim..."
 brew tap neovim/neovim
 brew install --HEAD neovim
 
+brew install gpg-agent
+brew install python3
