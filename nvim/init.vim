@@ -23,23 +23,23 @@ function! InitDeoplete()
   let g:deoplete#sources = get(g:,'deoplete#sources',{})
   let g:deoplete#_context = get(g:,'deoplete#_context',{})
   let g:deoplete# = get(g:,'deoplete#_context',{})
-  
-  
+
+
   " Use deoplete.
   let g:deoplete#enable_at_startup = 1
   " Use smartcase.
   let g:deoplete#enable_smart_case = 1
-  
+
   " <C-h>, <BS>: close popup and delete backword char.
   inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
   inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-  
+
   " <CR>: close popup and save indent.
   inoremap <silent> <CR> <C-r>=<SID>deoplete_cr_fn()<CR>
   function! s:deoplete_cr_fn() abort
     return deoplete#close_popup() . "\<CR>"
   endfunction
-  
+
   " make deoplete work with neosnippet
   " I want to use my tab more smarter. If we are inside a completion menu jump
   " to the next item. Otherwise check if there is any snippet to expand, if yes
@@ -57,22 +57,23 @@ function! InitDeoplete()
       return "\<tab>"
     endif
   endfunction
-  
+
   function! s:my_neosnippet_expand()
     if neosnippet#expandable_or_jumpable()
       return "\<Plug>(neosnippet_expand_or_jump)"
     endif
     return "\<c-tab>"
   endfunction
-  
+
   imap <expr><TAB> <SID>neosnippet_complete()
   imap <expr><C-TAB> <SID>my_neosnippet_expand()
 
 endfunction
 
 call dein#add('Shougo/deoplete.nvim', {
-  \ 'hook-post-source': function('InitDeoplete')
+  \ 'hook-add': function('InitDeoplete')
   \ })
+
 " End deoplete.nvim Related ------------------------
 
 call dein#add('Shougo/vimfiler.vim')
