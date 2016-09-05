@@ -7,6 +7,9 @@
   ci = commit
   cian = commit --amend --no-edit
   co = checkout
+  cp = cherry-pick
+  cpc = cherry-pick --continue
+  cpa = cherry-pick --abort
   di = diff
   aa = add --all
   b  = branch -vv
