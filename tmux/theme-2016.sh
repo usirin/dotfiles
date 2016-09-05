@@ -24,18 +24,6 @@ set -g message-command-bg black
 setw -g mode-bg colour6
 setw -g mode-fg colour0
 
-# window status
-setw -g window-status-format " #F#I:#W#F "
-setw -g window-status-current-format " #F#I:#W#F "
-setw -g window-status-format "#[fg=yellow]#[bg=black] #I #[bg=cyan]#[fg=colour8] #W "
-setw -g window-status-current-format "#[bg=brightyellow]#[fg=colour8] #I #[fg=colour8]#[bg=colour14] #W "
-setw -g window-status-current-bg colour0
-setw -g window-status-current-fg colour11
-setw -g window-status-current-attr dim
-setw -g window-status-bg green
-setw -g window-status-fg black
-setw -g window-status-attr reverse
-
 # Info on left (I don't have a session display for now)
 set -g status-left ''
 
@@ -69,7 +57,7 @@ tm_icon="♟"
 tm_separator_right_thin=" ❯"
 tm_separator_left_thin="❮ "
 tm_color_music=white
-tm_color_feature=yellow
+tm_color_feature=colour45
 tm_battery="#[fg=white,bg=colour240,bold] #{battery_percentage} "
 tm_date="#[fg=white,bg=colour242,bold] %m/%d/%Y #[fg=white,bg=colour244,bold] %H:%M:%S"
 tm_spotify="#[fg=$tm_color_music,bg=colour246,bold]#(osascript ~/dotfiles/osx/spotify.scpt)"
@@ -77,14 +65,14 @@ tm_session_name="#[fg=$tm_color_feature,bold]$tm_separator_right_thin #S $tm_sep
 
 umut_battery_perc="#(pmset -g batt | awk 'NR==2 { gsub(/;/,""); print $2 }')"
 setw -g window-status-current-fg colour81
-setw -g window-status-current-bg colour238
+setw -g window-status-current-bg colour240
 setw -g window-status-current-attr bold
 setw -g window-status-current-format ' #I#[fg=colour250]:#[fg=colour255]#W#[fg=colour50]#F '
 
-setw -g window-status-fg colour138
-setw -g window-status-bg colour235
+setw -g window-status-fg colour80
+setw -g window-status-bg colour240
 setw -g window-status-attr none
-setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244]#F '
+setw -g window-status-format ' #[fg=colour244]#I#[fg=colour237]:#[fg=colour244]#W#[fg=colour244]#F '
 
 setw -g window-status-bell-attr bold
 setw -g window-status-bell-fg colour255
@@ -100,8 +88,8 @@ set -g message-bg colour238
 # }
 
 set -g status-position bottom
-set -g status-bg colour238
-set -g status-fg colour137
+set -g status-bg colour240
+set -g status-fg colour51
 set -g status-attr dim
 set -g status-left $tm_session_name
 set -g status-right '#{battery_percentage} #{battery_icon} | %A | %h-%d | %H:%M '
