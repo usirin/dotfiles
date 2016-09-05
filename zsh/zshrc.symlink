@@ -67,7 +67,7 @@ if hash brew 2>/dev/null; then
 fi
 
 # oh-my-zsh plugins
-plugins=(git)
+plugins=(git brew npm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,3 +85,5 @@ fi
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+
