@@ -30,6 +30,9 @@ echo "Installing Powerline Fonts"
 git clone https://github.com/powerline/fonts.git /tmp/powerline-fonts
 /tmp/powerline-fonts/install.sh
 
+echo "Installing Neovim extras"
+sh install/neovim.sh
+
 echo "Configuring zsh as default shell"
 chsh -s $(which zsh)
 
