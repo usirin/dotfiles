@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Adding extra apt-get repositories"
+sudo add-apt-repository ppa:neovim-ppa/unstable
+
 echo "Updating apt-get"
 
 sudo apt-get update
@@ -16,6 +19,8 @@ sudo apt-get install cmake
 sudo apt-get install tig
 sudo apt-get install git
 
+sudo apt-get install neovim
 
+sudo apt-get install python3-pip
 
 

@@ -4,10 +4,10 @@ if &compatible
 endif
 
 " Required:
-set runtimepath^=/Users/umut/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin(expand('/Users/umut/.vim/dein/'))
+call dein#begin(expand('~/.config/nvim/dein/'))
 
 " Let dein manage dein
 " Required:
@@ -16,7 +16,65 @@ call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
-call dein#add('Shougo/deoplete.nvim')
+
+" deoplete.nvim Related ----------------------------
+
+function! InitDeoplete()
+  let g:deoplete#sources = get(g:,'deoplete#sources',{})
+  let g:deoplete#_context = get(g:,'deoplete#_context',{})
+  let g:deoplete# = get(g:,'deoplete#_context',{})
+  
+  
+  " Use deoplete.
+  let g:deoplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:deoplete#enable_smart_case = 1
+  
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+  
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>deoplete_cr_fn()<CR>
+  function! s:deoplete_cr_fn() abort
+    return deoplete#close_popup() . "\<CR>"
+  endfunction
+  
+  " make deoplete work with neosnippet
+  " I want to use my tab more smarter. If we are inside a completion menu jump
+  " to the next item. Otherwise check if there is any snippet to expand, if yes
+  " expand it. Also if inside a snippet and we need to jump tab jumps. If none
+  " of the above matches we just call our usual 'tab'.
+  let g:deoplete#ignore_sources = {}
+  let g:deoplete#ignore_sources._ = ["neosnippet"]
+  function! s:neosnippet_complete()
+    if pumvisibale()
+      return "\<c-n>"
+    else
+      if neosnippet#expandable_or_jumpable()
+        return "\<Plug>(neosnippet_expand_or_jump)"
+      endif
+      return "\<tab>"
+    endif
+  endfunction
+  
+  function! s:my_neosnippet_expand()
+    if neosnippet#expandable_or_jumpable()
+      return "\<Plug>(neosnippet_expand_or_jump)"
+    endif
+    return "\<c-tab>"
+  endfunction
+  
+  imap <expr><TAB> <SID>neosnippet_complete()
+  imap <expr><C-TAB> <SID>my_neosnippet_expand()
+
+endfunction
+
+call dein#add('Shougo/deoplete.nvim', {
+  \ 'hook-post-source': function('InitDeoplete')
+  \ })
+" End deoplete.nvim Related ------------------------
+
 call dein#add('Shougo/vimfiler.vim')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-commentary')
@@ -44,6 +102,12 @@ call dein#add('zhaocai/GoldenView.Vim')
 call dein#add('JulesWang/css.vim')
 call dein#add('jreybert/vimagit')
 call dein#add('mhinz/vim-startify')
+call dein#add('terryma/vim-expand-region')
+call dein#add('Yggdroot/indentLine')
+call dein#add('evanmiller/nginx-vim-syntax')
+call dein#add('christoomey/vim-tmux-runner')
+call dein#add('janko-m/vim-test')
+call dein#add('ap/vim-css-color')
 
 call dein#add('ternjs/tern_for_vim', {
 			\ 'build': 'npm install',
@@ -56,8 +120,9 @@ call dein#add('NLKNguyen/papercolor-theme')
 
 " Unite
 call dein#add('Shougo/unite.vim')
-" call dein#add('ujiihisa/unite-colorscheme')
+call dein#add('vim-scripts/unite-colorscheme')
 call dein#add('sgur/unite-everything')
+call dein#add('Shougo/neomru.vim')
 
 " Required:
 call dein#end()
@@ -140,7 +205,7 @@ let g:PaperColor_Dark_Override = {
   \ 'comment': '#5a5a5a'
   \ }
 
-colorscheme PaperColor
+colorscheme solarized
 set bg=dark
 
 " show only an underline behind the matched words
@@ -149,7 +214,7 @@ hi Search guibg=NONE guifg=NONE gui=underline
 
 " File specific color columns
 autocmd BufNewFile,BufReadPost *.coffee setl colorcolumn=80
-autocmd BufNewFile,BufReadPost *.styl setl colorcolumn=28
+autocmd BufNewFile,BufReadPost *.styl,*.stylus setl colorcolumn=28
 
 " End of Color scheme configuration ------------
 
@@ -236,17 +301,8 @@ nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file
 nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
-
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-endfunction
+nnoremap <leader>b :<C-u>Unite -quick-match -buffer-name=buffer  buffer<cr>
+nnoremap <leader>cs :<C-u>Unite -no-split -buffer-name=colorschemes colorscheme -auto-preview<cr>
 
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
@@ -262,6 +318,7 @@ endfunction
 
 
 " CtrlP Preferences ----------------------------
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_map = '<c-p>'
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -316,7 +373,7 @@ nnoremap <leader>kb :VimFilerBufferDir -buffer-name=explorer -split -simple -win
 
 
 " Coffee Script Related ----------------------------
-let coffee_compiler = '~/.nvm/v0.10.40/bin/cjsx'
+" let coffee_compiler = '~/.nvm/v0.10.40/bin/cjsx'
 " End Coffee Script Related ------------------------
 
 
@@ -363,7 +420,7 @@ let g:jsdoc_enable_es6=1
 
 
 " 1. split to tiled windows
-nmap <silent> <C-g><C-g>  <Plug>GoldenViewSplit
+nmap <silent> <C-g><C-g> :GoldenViewResize<cr>
 
 " 2. quickly switch current window with the main pane
 " and toggle back
@@ -377,27 +434,6 @@ nmap <silent> <C-g>N  <Plug>GoldenViewPrevious
 " End GoldenView Related ------------------------
 
 
-" deoplete.nvim Related ----------------------------
-let g:deoplete#sources = get(g:,'deoplete#sources',{})
-
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-" Use smartcase.
-let g:deoplete#enable_smart_case = 1
-
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>deoplete_cr_fn()<CR>
-function! s:deoplete_cr_fn() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
-
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" End deoplete.nvim Related ------------------------
 
 " Lightline related --------------------------------
 
@@ -450,3 +486,28 @@ augroup reload_vimrc
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 
+" vim-expand-region Preferences -------------------
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+" End vim-expand-region Preferences ---------------
+
+" indentLine preferences
+let g:indentLine_loaded = 1
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_char = '┊'
+let g:indentLine_leadingSpaceChar = '·'
+" end of indentLine
+
+" vim-test
+let test#strategy = 'vtr'
+let test#filename_modifier = ":~"
+
+let test#javascript#mocha#file_pattern = 'test/*.js'
+let test#javascript#mocha#executable = 'mocha --reporter spec --compilers js:babel-register'
+
+nmap <silent> <leader>n :TestNearest<CR>
+nmap <silent> <leader>j :TestFile<CR>
+nmap <silent> <leader>l :TestLast<CR>
+
+nmap <C-t> :VtrFocusRunner<cr>
+" !vim-test
