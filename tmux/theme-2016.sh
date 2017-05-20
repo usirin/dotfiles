@@ -57,20 +57,20 @@ tm_icon="♟"
 tm_separator_right_thin=" ❯"
 tm_separator_left_thin="❮ "
 tm_color_music=white
-tm_color_feature=colour45
+tm_color_feature=red
 tm_battery="#[fg=white,bg=colour240,bold] #{battery_percentage} "
-tm_date="#[fg=white,bg=colour242,bold] %m/%d/%Y #[fg=white,bg=colour244,bold] %H:%M:%S"
+tm_date="#[fg=white,bg=red] %m/%d/%Y #[fg=white,bg=magenta,bold] %H:%M:%S"
 tm_spotify="#[fg=$tm_color_music,bg=colour246,bold]#(osascript ~/dotfiles/osx/spotify.scpt)"
-tm_session_name="#[fg=$tm_color_feature,bold]$tm_separator_right_thin #S $tm_separator_left_thin"
+tm_session_name="#[fg=red]$tm_separator_right_thin #S $tm_separator_left_thin"
 
 umut_battery_perc="#(pmset -g batt | awk 'NR==2 { gsub(/;/,""); print $2 }')"
 setw -g window-status-current-fg colour81
-setw -g window-status-current-bg colour240
+setw -g window-status-current-bg default
 setw -g window-status-current-attr bold
 setw -g window-status-current-format ' #I#[fg=colour250]:#[fg=colour255]#W#[fg=colour50]#F '
 
 setw -g window-status-fg colour80
-setw -g window-status-bg colour240
+setw -g window-status-bg default
 setw -g window-status-attr none
 setw -g window-status-format ' #[fg=colour244]#I#[fg=colour237]:#[fg=colour244]#W#[fg=colour244]#F '
 
@@ -83,17 +83,23 @@ setw -g window-status-bell-bg colour1
 
 set -g message-attr bold
 set -g message-fg white
-set -g message-bg colour238
+set -g message-bg default
 
 # }
 
 set -g status-position bottom
-set -g status-bg colour240
+set -g status-bg default
 set -g status-fg colour51
 set -g status-attr dim
-set -g status-left $tm_session_name
-set -g status-right '#{battery_percentage} #{battery_icon} | %A | %h-%d | %H:%M '
+set -g status-left "$tm_session_name"
+set -g status-right "#[fg=red]%A | %h-%d | %H:%M "
 # set -g status-right $tm_battery'|'$tm_date' '$tm_spotify
 # set -g status-right-length 100
 set -g status-left-length 20
 
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+set -g pane-border-style 'fg=brightblack,bg=black'
+set -g pane-active-border-style 'fg=brightwhite,bg=black'
+set -g message-style 'fg=cyan, bg=black'
+set -g clock-mode-colour cyan
