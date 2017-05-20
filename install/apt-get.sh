@@ -18,6 +18,7 @@ sudo apt-get install cmake
 
 sudo apt-get install tig
 sudo apt-get install git
+sudo apt-get install tmux
 
 sudo apt-get install neovim
 
