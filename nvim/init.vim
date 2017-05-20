@@ -13,68 +13,7 @@ call dein#begin(expand('~/.config/nvim/dein/'))
 " Required:
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-
-" deoplete.nvim Related ----------------------------
-
-function! InitDeoplete()
-  let g:deoplete#sources = get(g:,'deoplete#sources',{})
-  let g:deoplete#_context = get(g:,'deoplete#_context',{})
-  let g:deoplete# = get(g:,'deoplete#_context',{})
-
-
-  " Use deoplete.
-  let g:deoplete#enable_at_startup = 1
-  " Use smartcase.
-  let g:deoplete#enable_smart_case = 1
-
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-
-  " <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>deoplete_cr_fn()<CR>
-  function! s:deoplete_cr_fn() abort
-    return deoplete#close_popup() . "\<CR>"
-  endfunction
-
-  " make deoplete work with neosnippet
-  " I want to use my tab more smarter. If we are inside a completion menu jump
-  " to the next item. Otherwise check if there is any snippet to expand, if yes
-  " expand it. Also if inside a snippet and we need to jump tab jumps. If none
-  " of the above matches we just call our usual 'tab'.
-  let g:deoplete#ignore_sources = {}
-  let g:deoplete#ignore_sources._ = ["neosnippet"]
-  function! s:neosnippet_complete()
-    if pumvisibale()
-      return "\<c-n>"
-    else
-      if neosnippet#expandable_or_jumpable()
-        return "\<Plug>(neosnippet_expand_or_jump)"
-      endif
-      return "\<tab>"
-    endif
-  endfunction
-
-  function! s:my_neosnippet_expand()
-    if neosnippet#expandable_or_jumpable()
-      return "\<Plug>(neosnippet_expand_or_jump)"
-    endif
-    return "\<c-tab>"
-  endfunction
-
-  imap <expr><TAB> <SID>neosnippet_complete()
-  imap <expr><C-TAB> <SID>my_neosnippet_expand()
-
-endfunction
-
-call dein#add('Shougo/deoplete.nvim', {
-  \ 'hook-add': function('InitDeoplete')
-  \ })
-
-" End deoplete.nvim Related ------------------------
+call dein#add('Shougo/deoplete.nvim')
 
 call dein#add('Shougo/vimfiler.vim')
 call dein#add('tpope/vim-fugitive')
@@ -82,10 +21,8 @@ call dein#add('tpope/vim-commentary')
 call dein#add('tpope/vim-markdown')
 call dein#add('tpope/vim-surround')
 call dein#add('airblade/vim-gitgutter')
-call dein#add('flazz/vim-colorschemes')
 call dein#add('kchmck/vim-coffee-script')
-call dein#add('mxw/vim-jsx')
-call dein#add('mtscout6/vim-cjsx')
+call dein#add('jwhitley/vim-literate-coffeescript')
 call dein#add('dbakker/vim-projectroot')
 call dein#add('mattn/webapi-vim')
 call dein#add('mattn/gist-vim')
@@ -95,7 +32,6 @@ call dein#add('itchyny/lightline.vim')
 call dein#add('wavded/vim-stylus')
 call dein#add('godlygeek/tabular')
 call dein#add('kern/vim-es7')
-call dein#add('gavocanov/vim-js-indent')
 call dein#add('fatih/vim-go')
 call dein#add('heavenshell/vim-jsdoc')
 call dein#add('Raimondi/delimitMate')
@@ -103,12 +39,29 @@ call dein#add('zhaocai/GoldenView.Vim')
 call dein#add('JulesWang/css.vim')
 call dein#add('jreybert/vimagit')
 call dein#add('mhinz/vim-startify')
+call dein#add('junegunn/gv.vim')
 call dein#add('terryma/vim-expand-region')
 call dein#add('Yggdroot/indentLine')
 call dein#add('evanmiller/nginx-vim-syntax')
-call dein#add('christoomey/vim-tmux-runner')
 call dein#add('janko-m/vim-test')
-call dein#add('ap/vim-css-color')
+call dein#add('trevordmiller/nova-vim')
+call dein#add('othree/yajs.vim')
+call dein#add('othree/es.next.syntax.vim')
+call dein#add('mxw/vim-jsx')
+call dein#add('ervandew/supertab')
+call dein#add('davidhalter/jedi-vim')
+call dein#add('sheerun/vim-polyglot')
+call dein#add('fleischie/vim-styled-components')
+call dein#add('sbdchd/neoformat')
+call dein#add('floobits/floobits-neovim')
+
+" Mainly R related
+call dein#add('xolox/vim-misc')
+call dein#add('xolox/vim-notes')
+call dein#add('vim-scripts/utl.vim')
+call dein#add('vim-scripts/taglist.vim')
+call dein#add('vim-scripts/SyntaxRange')
+call dein#add('tpope/vim-speeddating')
 
 call dein#add('ternjs/tern_for_vim', {
 			\ 'build': 'npm install',
@@ -136,7 +89,7 @@ if dein#check_install()
   call dein#install()
 endif
 
-"End dein Scripts-------------------------
+" End dein Scripts-------------------------
 
 
 " Basic Configuration --------------------------
@@ -170,12 +123,16 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set shiftround
+set cursorline
+set winwidth=79
+set winheight=5
+set winminheight=5
+set winminwidth=40
 
 set scrolloff=5
 
 set laststatus=2
 set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
-
 
 " highlight trailing whitespace
 set list listchars=tab:\ \ ,trail:·,nbsp:·
@@ -188,12 +145,25 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " Enable true color support so that we can see colors awesome.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+" persist undos across sessions
+try
+  set undodir=~/.config/nvim/temp_dirs/undodir
+  set undofile
+catch
+endtry
+
 " set context to current file's directory
 autocmd BufEnter * silent! lcd %:p:h
 
 " remove whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
+" let g:notes_directories = ['~/dev/usirin/notes']
+nnoremap <tab> zo
+nnoremap <s-tab> zc
+
+" Make <C-Ww> to toggle split to maximized
+nnoremap <silent> <C-w>w :ZoomWin<CR>
 
 " End Basic Configuration ----------------------
 
@@ -206,16 +176,23 @@ let g:PaperColor_Dark_Override = {
   \ 'comment': '#5a5a5a'
   \ }
 
-colorscheme solarized
+colorscheme nova
 set bg=dark
 
 " show only an underline behind the matched words
 hi Search ctermbg=NONE ctermfg=NONE cterm=underline
 hi Search guibg=NONE guifg=NONE gui=underline
 
+" this is to make only numbers colored up
+hi CursorLine ctermbg=NONE
+hi CursorLine guibg=NONE
+
 " File specific color columns
-autocmd BufNewFile,BufReadPost *.coffee setl colorcolumn=80
+autocmd BufNewFile,BufReadPost *.coffee,*.js setl colorcolumn=80
+autocmd BufNewFile,BufReadPost *.litcoffee setl colorcolumn=80
 autocmd BufNewFile,BufReadPost *.styl,*.stylus setl colorcolumn=28
+
+autocmd FileType java setlocal shiftwidth=4 tabstop=4
 
 " End of Color scheme configuration ------------
 
@@ -241,7 +218,7 @@ nnoremap <leader><space> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 " Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :vs $MYVIMRC<cr>
+nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <silent> <leader>sv :so $MYVIMRC<cr>
 
 " Use space for space in normal mode
@@ -264,6 +241,7 @@ nnoremap _ :sp<cr>
 
 " create a new tab easily
 nnoremap tt :tabe<cr>:Startify<cr>
+let g:startify_custom_header = []
 
 " navigation between tabs
 nnoremap t[ :tabprev<cr>
@@ -284,12 +262,16 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
 let g:unite_data_directory = expand("~/.cache/unite")
+
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
-      \ '-i --vimgrep --hidden --ignore ' .
-      \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+      \ '--line-numbers --nocolor --vimgrep --nogroup --hidden --ignore ' .
+      \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 
-let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+let g:unite_source_grep_recursive_opt = ''
+
+let g:unite_source_rec_async_command =
+  \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
 
 nnoremap <C-f>f :UniteWithProjectDir -direction=botright grep:!<cr>
 nnoremap <C-f>a :<C-u>UniteWithProjectDir -no-split -buffer-name=grep -start-insert grep:!<cr>
@@ -297,12 +279,12 @@ nnoremap <C-f>a :<C-u>UniteWithProjectDir -no-split -buffer-name=grep -start-ins
 " Unite
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>p :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>p :<C-u>Unite -no-split -buffer-name=files     -start-insert file_rec/async:!<cr>
+nnoremap <leader>f :<C-u>UniteWithProjectDir -no-split -buffer-name=files     -start-insert file<cr>
+nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru       -start-insert file_mru<cr>
+nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline   -start-insert outline<cr>
+nnoremap <leader>b :<C-u>Unite -buffer-name=buffer -start-insert buffer<cr>
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-nnoremap <leader>b :<C-u>Unite -quick-match -buffer-name=buffer  buffer<cr>
 nnoremap <leader>cs :<C-u>Unite -no-split -buffer-name=colorschemes colorscheme -auto-preview<cr>
 
 " Custom mappings for the unite buffer
@@ -311,6 +293,7 @@ function! s:unite_settings()
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j> <Plug>(unite_select_next_line)
   imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+
   imap <silent><buffer><expr> <C-s> unite#do_action('split')
   imap <silent><buffer><expr> <C-v> unite#do_action('right')
 endfunction
@@ -324,7 +307,7 @@ let g:ctrlp_map = '<c-p>'
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$\|vendor',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
 
@@ -333,6 +316,17 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_use_caching = 1
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
+
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
 
 " Hello
 let g:ctrlp_max_files = 0
@@ -374,7 +368,12 @@ nnoremap <leader>kb :VimFilerBufferDir -buffer-name=explorer -split -simple -win
 
 
 " Coffee Script Related ----------------------------
-" let coffee_compiler = '~/.nvm/v0.10.40/bin/cjsx'
+let coffee_compiler = '~/.nvm/v0.10.46/bin/cjsx'
+" let coffee_compiler = '/Users/umutsirin/.nvm/versions/node/v6.9.1/bin/coffee'
+" let coffee_compiler = '/Users/umutsirin/.nvm/versions/node/v6.9.2/bin/cjsx'
+
+autocmd FileType litcoffee runtime ftplugin/coffee.vim
+
 " End Coffee Script Related ------------------------
 
 
@@ -500,11 +499,14 @@ let g:indentLine_leadingSpaceChar = '·'
 " end of indentLine
 
 " vim-test
-let test#strategy = 'vtr'
+let test#strategy = 'neovim'
 let test#filename_modifier = ":~"
 
-let test#javascript#mocha#file_pattern = 'test/*.js'
+let test#javascript#mocha#file_pattern = '\vtest\.(js|jsx|coffee)$'
 let test#javascript#mocha#executable = 'mocha --reporter spec --compilers js:babel-register'
+
+" vim-jsx
+let g:jsx_ext_required = 0
 
 nmap <silent> <leader>n :TestNearest<CR>
 nmap <silent> <leader>j :TestFile<CR>
@@ -512,3 +514,91 @@ nmap <silent> <leader>l :TestLast<CR>
 
 nmap <C-t> :VtrFocusRunner<cr>
 " !vim-test
+"
+
+" deoplete.nvim Related ----------------------------
+
+" let g:deoplete#sources = get(g:,'deoplete#sources',{})
+" let g:deoplete#_context = get(g:,'deoplete#_context',{})
+" let g:deoplete# = get(g:,'deoplete#_context',{})
+
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" Use smartcase.
+let g:deoplete#enable_smart_case = 1
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>deoplete_cr_fn()<CR>
+function! s:deoplete_cr_fn() abort
+  return deoplete#close_popup() . "\<CR>"
+endfunction
+
+" make deoplete work with neosnippet
+" I want to use my tab more smarter. If we are inside a completion menu jump
+" to the next item. Otherwise check if there is any snippet to expand, if yes
+" expand it. Also if inside a snippet and we need to jump tab jumps. If none
+" of the above matches we just call our usual 'tab'.
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ["neosnippet"]
+
+" imap <expr><TAB> <SID>neosnippet_complete()
+" imap <expr><C-TAB> <SID>my_neosnippet_expand()
+inoremap <expr><c-j> pumvisible() ? "\<c-n>" : "\<c-j>"
+inoremap <expr><c-k> pumvisible() ? "\<c-p>" : "\<c-k>"
+
+
+" End deoplete.nvim Related ------------------------
+
+" Super tab & jedi ----------------------------------------
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+
+autocmd FileType *
+\ if &omnifunc != '' |
+\   call SuperTabChain(&omnifunc, "<c-p>") |
+\ endif
+
+" let g:jedi#use_splits_not_buffers = "right"
+
+" End Super tab ----------------------------------------
+
+
+" R & Rmd configurations
+let r_syntax_folding = 1
+"
+
+
+" vim css-color
+nnoremap <leader>ee :call css_color#toggle()<cr>
+"
+
+" Neoformat
+let g:neoformat_javascript_prettier = {
+      \ 'exe': 'prettier',
+      \ 'args': [
+      \   '--print-width 80',
+      \   '--single-quote',
+      \   '--trailing-comma es5',
+      \   '--stdin',
+      \   '--no-semi'
+      \ ],
+      \ 'stdin': 1,
+      \ }
+
+let g:neoformat_enabled_javascript = ['prettier']
+
+nnoremap <leader>W :Neoformat<cr>:w<cr>:%s/;$//g<cr><C-o>
+nnoremap <leader>w :Neoformat<cr>:w<cr>
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * Neoformat
+augroup END
+
+"
+"
