@@ -22,4 +22,6 @@ alias l="ls -lahF ${colorflag}"
 # using supervisorctl like crazy so assign it to `s`
 alias s='supervisorctl'
 
+alias atom-beta='atom-beta --enable-gpu-rasterization'
+
 
