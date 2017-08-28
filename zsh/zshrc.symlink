@@ -71,11 +71,6 @@ plugins=(git brew npm)
 
 source $ZSH/oh-my-zsh.sh
 
-if [[ `uname` == 'Darwin' ]]; then
-  # export boot2docker variables
-  eval "$(boot2docker shellinit)"
-fi
-
 [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
 if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
   export GPG_AGENT_INFO
@@ -85,5 +80,11 @@ fi
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$PATH"
+
+export PATH="/Users/umutsirin/Library/Python/3.6/bin:$PATH"
