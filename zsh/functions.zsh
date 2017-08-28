@@ -1,3 +1,14 @@
+CLR_RESET='\033[0m'
+CLR_BOLD_GREEN='\033[1;32m'
+CLR_BOLD_YELLOW='\033[1;33m'
+
+TICK="✓"
+ARROW="▸"
+DOT="●"
+
+GREEN_TICK="${CLR_BOLD_GREEN}${TICK}${CLR_RESET}"
+YELLOW_ARROW="${CLR_BOLD_YELLOW}${ARROW}${CLR_RESET}"
+
 gdiff() { git diff --color "$@" }
 
 sdiff() { svn diff "$@" | view - }
@@ -12,42 +23,6 @@ kd-conf() {
 
 oud() { /tmp/ngrok -config=/tmp/.ngrok.conf -subdomain="$@".koding-`whoami` 127.0.0.1:8090 }
 
-dps()  {
-  docker ps $@ | awk '
-  NR==1{
-    FIRSTLINEWIDTH=length($0)
-    IDPOS=index($0,"CONTAINER ID");
-    IMAGEPOS=index($0,"IMAGE");
-    COMMANDPOS=index($0,"COMMAND");
-    CREATEDPOS=index($0,"CREATED");
-    STATUSPOS=index($0,"STATUS");
-    PORTSPOS=index($0,"PORTS");
-    NAMESPOS=index($0,"NAMES");
-    UPDATECOL();
-  }
-  function UPDATECOL () {
-    ID=substr($0,IDPOS,IMAGEPOS-IDPOS-1);
-    IMAGE=substr($0,IMAGEPOS,COMMANDPOS-IMAGEPOS-1);
-    COMMAND=substr($0,COMMANDPOS,CREATEDPOS-COMMANDPOS-1);
-    CREATED=substr($0,CREATEDPOS,STATUSPOS-CREATEDPOS-1);
-    STATUS=substr($0,STATUSPOS,PORTSPOS-STATUSPOS-1);
-    PORTS=substr($0,PORTSPOS,NAMESPOS-PORTSPOS-1);
-    NAMES=substr($0, NAMESPOS);
-  }
-  function PRINT () {
-    print ID NAMES IMAGE STATUS CREATED COMMAND PORTS;
-  }
-  NR==2{
-    NAMES=sprintf("%s%*s",NAMES,length($0)-FIRSTLINEWIDTH,"");
-    PRINT();
-  }
-  NR>1{
-    UPDATECOL();
-    PRINT();
-  }' | less -FSX;
-}
-dpsa() { dps -a $@; }
-
 autoload -U add-zsh-hook
 load-nvmrc() {
   if [[ -f .nvmrc && -r .nvmrc ]]; then
@@ -58,4 +33,44 @@ add-zsh-hook chpwd load-nvmrc
 
 b2d() { eval "$(boot2docker shellinit)" }
 
+docker-clean() {
+  docker ps -aq | xargs docker rm -f
+  docker images -aq | xargs docker rmi -f
+}
+
+dc() { docker-compose $@ }
+
+dm() { docker-machine $@ }
+
+dm-unset() {
+  unset DOCKER_TLS_VERIFY
+  unset DOCKER_CERT_PATH
+  unset DOCKER_MACHINE_NAME
+  unset DOCKER_HOST
+}
+
+dm-use() {
+  MACHINE=${1:-default}
+  MACHINE_NAME="${CLR_BOLD_YELLOW}${MACHINE}${CLR_RESET}"
+
+  # Get ip of given machine
+  echo -ne "${YELLOW_ARROW} Getting ip of ${MACHINE_NAME}...\r"
+
+  IP=$(docker-machine ip $MACHINE)
+  MACHINE_IP="${CLR_BOLD_YELLOW}${IP}${CLR_RESET}"
+
+  echo -ne "${GREEN_TICK} Getting ip of ${MACHINE_NAME}: Done\r"
+  echo -ne "\n"
+
+  # Start switching to given machine
+  echo -ne "${ARROW} Switching to machine ${MACHINE_NAME}...\r"
+
+  eval "$(docker-machine env ${MACHINE})"
+
+  echo -ne "${GREEN_TICK} Switching to machine ${MACHINE_NAME}: Done\r"
+
+  echo \
+    "\n  ${DOT} name : ${MACHINE_NAME}" \
+    "\n  ${DOT} ip   : ${MACHINE_IP}"
+}
 
