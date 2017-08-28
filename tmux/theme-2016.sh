@@ -65,7 +65,7 @@ tm_session_name="#[fg=red]$tm_separator_right_thin #S $tm_separator_left_thin"
 
 umut_battery_perc="#(pmset -g batt | awk 'NR==2 { gsub(/;/,""); print $2 }')"
 setw -g window-status-current-fg colour81
-setw -g window-status-current-bg default
+setw -g window-status-current-bg colour236
 setw -g window-status-current-attr bold
 setw -g window-status-current-format ' #I#[fg=colour250]:#[fg=colour255]#W#[fg=colour50]#F '
 
@@ -88,7 +88,7 @@ set -g message-bg default
 # }
 
 set -g status-position bottom
-set -g status-bg default
+set -g status-bg colour234
 set -g status-fg colour51
 set -g status-attr dim
 set -g status-left "$tm_session_name"
