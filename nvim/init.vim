@@ -13,7 +13,7 @@ call dein#begin(expand('~/.config/nvim/dein/'))
 " Required:
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-call dein#add('Shougo/deoplete.nvim')
+call dein#add('Shougo/deoplete.nvim', { 'build': ':UpdateRemotePlugins' })
 
 call dein#add('Shougo/vimfiler.vim')
 call dein#add('tpope/vim-fugitive')
@@ -37,37 +37,41 @@ call dein#add('heavenshell/vim-jsdoc')
 call dein#add('Raimondi/delimitMate')
 call dein#add('zhaocai/GoldenView.Vim')
 call dein#add('JulesWang/css.vim')
-call dein#add('jreybert/vimagit')
 call dein#add('mhinz/vim-startify')
 call dein#add('junegunn/gv.vim')
-call dein#add('terryma/vim-expand-region')
 call dein#add('Yggdroot/indentLine')
 call dein#add('evanmiller/nginx-vim-syntax')
 call dein#add('janko-m/vim-test')
 call dein#add('trevordmiller/nova-vim')
 call dein#add('othree/yajs.vim')
 call dein#add('othree/es.next.syntax.vim')
+call dein#add('othree/javascript-libraries-syntax.vim')
 call dein#add('mxw/vim-jsx')
 call dein#add('ervandew/supertab')
 call dein#add('davidhalter/jedi-vim')
 call dein#add('sheerun/vim-polyglot')
 call dein#add('fleischie/vim-styled-components')
 call dein#add('sbdchd/neoformat')
-call dein#add('floobits/floobits-neovim')
+call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+call dein#add('flazz/vim-colorschemes')
+call dein#add('mklabs/split-term.vim')
 
-" Mainly R related
-call dein#add('xolox/vim-misc')
-call dein#add('xolox/vim-notes')
-call dein#add('vim-scripts/utl.vim')
-call dein#add('vim-scripts/taglist.vim')
-call dein#add('vim-scripts/SyntaxRange')
-call dein#add('tpope/vim-speeddating')
+call dein#add('prettier/vim-prettier', {
+			\ 'build': 'npm install',
+			\ 'if': 'executable("npm")',
+			\ 'on_i': 1,
+			\ 'on_ft': ['javascript', 'javascript.jsx', 'typescript', 'css', 'less', 'scss', 'json']
+			\ })
+
+call dein#add('w0rp/ale')
+call dein#add('rakr/vim-two-firewatch')
 
 call dein#add('ternjs/tern_for_vim', {
 			\ 'build': 'npm install',
 			\ 'if': 'executable("npm")',
 			\ 'on_i': 1,
-			\ 'on_ft': 'javascript'
+			\ 'on_ft': 'javascript.jsx'
 			\ })
 
 call dein#add('NLKNguyen/papercolor-theme')
@@ -96,6 +100,8 @@ endif
 let g:goldenview__enable_default_mapping = 0
 syntax enable
 
+let g:python3_host_prog='/usr/local/bin/python3'
+
 set visualbell
 set noerrorbells
 set showcmd
@@ -111,6 +117,10 @@ set splitbelow
 set backspace=indent,eol,start
 set number
 set nowrap
+
+" set noshowcmd
+" set nolazyredraw
+
 set lazyredraw
 set noshowmatch
 set incsearch
@@ -123,7 +133,7 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set shiftround
-set cursorline
+set nocursorline
 set winwidth=79
 set winheight=5
 set winminheight=5
@@ -169,13 +179,6 @@ nnoremap <silent> <C-w>w :ZoomWin<CR>
 
 " Color scheme configuration -------------------
 
-let g:PaperColor_Dark_Override = {
-  \ 'background': '#212121',
-  \ 'cursorline': '#313131',
-  \ 'matchparen': '#4a4a4a',
-  \ 'comment': '#5a5a5a'
-  \ }
-
 colorscheme nova
 set bg=dark
 
@@ -187,9 +190,15 @@ hi Search guibg=NONE guifg=NONE gui=underline
 hi CursorLine ctermbg=NONE
 hi CursorLine guibg=NONE
 
+" hi ColorColumn ctermbg=DarkGray
+
+" hi Cursor ctermfg=black ctermbg=white cterm=NONE
+" hi CursorIM ctermfg=black ctermbg=white cterm=reverse
+" hi Visual cterm=NONE ctermbg=0 ctermfg=NONE
+" hi Comment cterm=NONE ctermbg=NONE ctermfg=DarkGray
+
 " File specific color columns
-autocmd BufNewFile,BufReadPost *.coffee,*.js setl colorcolumn=80
-autocmd BufNewFile,BufReadPost *.litcoffee setl colorcolumn=80
+autocmd BufNewFile,BufReadPost *.coffee,*.js,*.litcoffee setl colorcolumn=80
 autocmd BufNewFile,BufReadPost *.styl,*.stylus setl colorcolumn=28
 
 autocmd FileType java setlocal shiftwidth=4 tabstop=4
@@ -303,7 +312,7 @@ endfunction
 
 " CtrlP Preferences ----------------------------
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = "<C-'>"
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
@@ -486,11 +495,6 @@ augroup reload_vimrc
   autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
 
-" vim-expand-region Preferences -------------------
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-" End vim-expand-region Preferences ---------------
-
 " indentLine preferences
 let g:indentLine_loaded = 1
 let g:indentLine_leadingSpaceEnabled = 1
@@ -512,7 +516,7 @@ nmap <silent> <leader>n :TestNearest<CR>
 nmap <silent> <leader>j :TestFile<CR>
 nmap <silent> <leader>l :TestLast<CR>
 
-nmap <C-t> :VtrFocusRunner<cr>
+" nmap <C-t> :VtrFocusRunner<cr>
 " !vim-test
 "
 
@@ -577,28 +581,74 @@ let r_syntax_folding = 1
 nnoremap <leader>ee :call css_color#toggle()<cr>
 "
 
-" Neoformat
-let g:neoformat_javascript_prettier = {
-      \ 'exe': 'prettier',
-      \ 'args': [
-      \   '--print-width 80',
-      \   '--single-quote',
-      \   '--trailing-comma es5',
-      \   '--stdin',
-      \   '--no-semi'
-      \ ],
-      \ 'stdin': 1,
-      \ }
+" Prettier
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#semi = 'false'
+let g:prettier#config#trailing_comma = 'es5'
+let g:prettier#config#bracket_spacing = 'true'
 
-let g:neoformat_enabled_javascript = ['prettier']
-
-nnoremap <leader>W :Neoformat<cr>:w<cr>:%s/;$//g<cr><C-o>
-nnoremap <leader>w :Neoformat<cr>:w<cr>
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * Neoformat
+  autocmd BufWritePre *.js,*.json PrettierAsync
 augroup END
+" end Prettier
 
 "
+let g:fzf_layout = { 'down': '20%' }
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+command! -bang -nargs=* Buffers
+  \ call fzf#vim#buffers(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'GitFiles' s:find_git_root()
+
+nnoremap <C-p> :ProjectFiles<cr>
+
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+let g:ale_open_list = 0
+let g:ale_lint_on_text_changed = 'never'
 "
