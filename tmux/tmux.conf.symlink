@@ -110,8 +110,10 @@ unbind [
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
-bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'y' copy-selection
+bind -Tcopy-mode-vi v send -X begin-selection
+bind -Tcopy-mode-vi y send -X copy-selection
+# bind -t vi-copy v begin-selection
+# bind -t vi-copy y copy-selection
 
 # Buffers to/from Mac clipboard, yay tmux book from pragprog
 bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
