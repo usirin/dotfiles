@@ -475,10 +475,16 @@ function! LightLineReadonly()
   return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
 endfunction
 function! LightLineFilename()
+  let paths = split(expand('%:p'), '/')
+  let path_folder_file = join(paths[-2:], '/')
+  let path_before = join(map(paths[0:-3], 'v:val[0]'), '/')
+  let shortened_filename = path_before . '/' . path_folder_file
+  let shortened_filename = '' != path_before ? '/' . shortened_filename : shortened_filename
   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
   \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
   \  &ft == 'unite' ? unite#get_status_string() :
   \  &ft == 'vimshell' ? vimshell#get_status_string() :
+  \ '' != shortened_filename ? shortened_filename :
   \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
   \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
