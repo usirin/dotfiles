@@ -118,6 +118,8 @@ set backspace=indent,eol,start
 set number
 set nowrap
 
+set noshowmode
+
 " set noshowcmd
 " set nolazyredraw
 
