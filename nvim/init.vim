@@ -55,6 +55,7 @@ call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('flazz/vim-colorschemes')
 call dein#add('mklabs/split-term.vim')
+call dein#add('wellle/targets.vim')
 
 call dein#add('prettier/vim-prettier', {
 			\ 'build': 'npm install',
