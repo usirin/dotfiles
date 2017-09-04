@@ -88,3 +88,5 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export PATH="/Users/umutsirin/Library/Python/3.6/bin:$PATH"
+
+export NVIM_LISTEN_ADDRESS=/tmp/nvim
