@@ -74,3 +74,19 @@ dm-use() {
     "\n  ${DOT} ip   : ${MACHINE_IP}"
 }
 
+dl-yarn() {
+  dl_type=${1:-nightly}
+  cmd="curl -o- -L https://yarnpkg.com/install.sh | bash"
+  if [ "$dl_type" == 'nightly' ]; then
+    echo "downloading nightly version..."
+    curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --nightly
+  elif [ "$dl_type" == 'rc' ]; then
+    echo "downloading rc version..."
+    curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --rc
+  else
+    echo "downloading latest version..."
+    curl -o- -L https://yarnpkg.com/install.sh | bash
+  fi
+
+  source $HOME/.zshrc
+}
