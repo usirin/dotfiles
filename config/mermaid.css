@@ -1,0 +1,30 @@
+.mermaid {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #111;
+  width: 100%;
+}
+
+.mermaid .edgeLabel {
+  background-color: #ececff;
+  font-weight: 500;
+  padding: 2px 3px;
+  border: 1px solid #ccccff;
+  border-radius: 2px;
+}
+
+.mermaid .edgeLabel:empty {
+  visibility: hidden;
+}
+
+.mermaid .node {
+  text-align: center;
+}
+
+/* .mermaid .node polygon, */
+/* .mermaid .node circle, */
+/* .mermaid .node rect { */
+/*   fill: #ddd; */
+/*   stroke: #aaa; */
+/*   stroke-width: 2px; */
+/* } */
