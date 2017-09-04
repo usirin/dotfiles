@@ -22,7 +22,6 @@ call dein#add('tpope/vim-markdown')
 call dein#add('tpope/vim-surround')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('kchmck/vim-coffee-script')
-call dein#add('jwhitley/vim-literate-coffeescript')
 call dein#add('dbakker/vim-projectroot')
 call dein#add('mattn/webapi-vim')
 call dein#add('mattn/gist-vim')
@@ -35,7 +34,6 @@ call dein#add('heavenshell/vim-jsdoc')
 call dein#add('Raimondi/delimitMate')
 call dein#add('zhaocai/GoldenView.Vim')
 call dein#add('mhinz/vim-startify')
-call dein#add('janko-m/vim-test')
 call dein#add('trevordmiller/nova-vim')
 call dein#add('othree/yajs.vim')
 call dein#add('othree/es.next.syntax.vim')
@@ -44,6 +42,7 @@ call dein#add('mxw/vim-jsx')
 call dein#add('ervandew/supertab')
 call dein#add('sheerun/vim-polyglot')
 call dein#add('fleischie/vim-styled-components')
+call dein#add('hail2u/vim-css3-syntax')
 call dein#add('sbdchd/neoformat')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
@@ -82,6 +81,8 @@ endif
 
 " End dein Scripts-------------------------
 
+" function to load all config files with .vim extension under
+" neovim config folder.
 function! s:LoadConfigs()
   let paths = split(glob('$DOTFILES/nvim/*.vim'), "\n")
   call filter(paths, 'v:val !~ "init.vim"')
@@ -91,16 +92,13 @@ function! s:LoadConfigs()
   endfor
 endfunc
 
+" load all config nvim configuration files
 call s:LoadConfigs()
 
+" whenever a config file changes, source config.
 augroup reload_vimrc
   autocmd!
   autocmd bufwritepost $DOTFILES/nvim/*.vim nested source $MYVIMRC
 augroup END
 
-function! Relpath(filename)
-  let cwd = getcwd()
-  let s = substitute(a:filename, l:cwd . "/" , "", "")
-  return s
-endfunction
 
