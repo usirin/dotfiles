@@ -29,21 +29,13 @@ call dein#add('terryma/vim-multiple-cursors')
 call dein#add('itchyny/lightline.vim')
 call dein#add('wavded/vim-stylus')
 call dein#add('godlygeek/tabular')
-call dein#add('kern/vim-es7')
-call dein#add('heavenshell/vim-jsdoc')
 call dein#add('Raimondi/delimitMate')
 call dein#add('zhaocai/GoldenView.Vim')
 call dein#add('mhinz/vim-startify')
 call dein#add('trevordmiller/nova-vim')
-call dein#add('othree/yajs.vim')
-call dein#add('othree/es.next.syntax.vim')
-call dein#add('othree/javascript-libraries-syntax.vim')
-call dein#add('mxw/vim-jsx')
 call dein#add('ervandew/supertab')
 call dein#add('sheerun/vim-polyglot')
-call dein#add('fleischie/vim-styled-components')
 call dein#add('hail2u/vim-css3-syntax')
-call dein#add('sbdchd/neoformat')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('flazz/vim-colorschemes')
@@ -52,6 +44,17 @@ call dein#add('wellle/targets.vim')
 call dein#add('neovim/node-host')
 call dein#add('tyru/open-browser.vim')
 call dein#add('kannokanno/previm')
+
+call dein#add('heavenshell/vim-jsdoc')
+call dein#add('fleischie/vim-styled-components')
+call dein#add('neoclide/vim-jsx-improve')
+
+call dein#add('neoclide/tern-neovim', {
+			\ 'build': 'npm install',
+			\ 'if': 'executable("npm")',
+			\ 'on_i': 1,
+			\ 'on_ft': ['javascript', 'javascript.jsx']
+			\ })
 
 call dein#add('prettier/vim-prettier', {
 			\ 'build': 'npm install',
@@ -62,11 +65,20 @@ call dein#add('prettier/vim-prettier', {
 
 call dein#add('w0rp/ale')
 
+call dein#add('justinmk/vim-sneak')
+
 " Unite
 call dein#add('Shougo/unite.vim')
 call dein#add('vim-scripts/unite-colorscheme')
 call dein#add('sgur/unite-everything')
 call dein#add('Shougo/neomru.vim')
+
+call dein#add('Shougo/denite.nvim')
+call dein#add('nixprime/cpsm')
+call dein#add('neoclide/macnote.vim')
+call dein#add('chemzqm/denite-extra')
+call dein#add('neoclide/ultisnips')
+
 
 " Required:
 call dein#end()
@@ -100,5 +112,4 @@ augroup reload_vimrc
   autocmd!
   autocmd bufwritepost $DOTFILES/nvim/*.vim nested source $MYVIMRC
 augroup END
-
 
