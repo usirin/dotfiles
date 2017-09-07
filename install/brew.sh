@@ -30,7 +30,6 @@ brew install node
 brew install golang
 brew install python
 
-brew install boot2docker
 brew install mongodb
 brew install nginx
 brew install postgresql
