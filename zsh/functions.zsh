@@ -31,8 +31,6 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 
-b2d() { eval "$(boot2docker shellinit)" }
-
 docker-clean() {
   docker ps -aq | xargs docker rm -f
   docker images -aq | xargs docker rmi -f
