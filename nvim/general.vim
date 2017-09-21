@@ -1,5 +1,6 @@
 syntax enable
 
+set mouse=a
 set visualbell
 set noerrorbells
 set showcmd
