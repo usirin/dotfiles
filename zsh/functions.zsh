@@ -31,6 +31,10 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 
+kb() { kubectl $@ }
+
+mkb() { minikube $@ }
+
 docker-clean() {
   docker ps -aq | xargs docker rm -f
   docker images -aq | xargs docker rmi -f
