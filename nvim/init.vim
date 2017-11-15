@@ -49,12 +49,13 @@ call dein#add('heavenshell/vim-jsdoc')
 call dein#add('fleischie/vim-styled-components')
 call dein#add('neoclide/vim-jsx-improve')
 
-call dein#add('neoclide/tern-neovim', {
-			\ 'build': 'npm install',
-			\ 'if': 'executable("npm")',
-			\ 'on_i': 1,
-			\ 'on_ft': ['javascript', 'javascript.jsx']
-			\ })
+" call dein#add('neoclide/tern-neovim', {
+" 			\ 'build': 'npm install',
+" 			\ 'if': 'executable("npm")',
+" 			\ 'on_i': 1,
+" 			\ 'on_ft': ['javascript', 'javascript.jsx']
+" 			\ })
+" 			\ })
 
 call dein#add('prettier/vim-prettier', {
 			\ 'build': 'npm install',
