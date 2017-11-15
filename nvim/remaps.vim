@@ -51,7 +51,7 @@ nnoremap t] :tabnext<cr>
 
 " comment with same keys for both normal and visual mode
 nmap <leader>a gcc
-vmap <leader>a gc
+vmap <leader>a gcgv
 
 nnoremap <C-F>h :vert help<space>
 
