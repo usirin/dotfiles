@@ -92,3 +92,9 @@ dl-yarn() {
 
   source $HOME/.zshrc
 }
+
+ensure_line() {
+  LINE=$1
+  FILE=$2
+  grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+}
