@@ -1,4 +1,3 @@
-"dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -6,103 +5,36 @@ endif
 " Required:
 set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
-" Required:
-call dein#begin(expand('~/.config/nvim/dein/'))
-
-" Let dein manage dein
-" Required:
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-call dein#add('Shougo/deoplete.nvim', { 'build': ':UpdateRemotePlugins' })
-
-call dein#add('Shougo/vimfiler.vim')
-call dein#add('tpope/vim-fugitive')
-call dein#add('tpope/vim-commentary')
-call dein#add('tpope/vim-markdown')
-call dein#add('tpope/vim-surround')
-call dein#add('airblade/vim-gitgutter')
-call dein#add('kchmck/vim-coffee-script')
-call dein#add('dbakker/vim-projectroot')
-call dein#add('mattn/webapi-vim')
-call dein#add('mattn/gist-vim')
-call dein#add('terryma/vim-multiple-cursors')
-call dein#add('itchyny/lightline.vim')
-call dein#add('wavded/vim-stylus')
-call dein#add('godlygeek/tabular')
-call dein#add('Raimondi/delimitMate')
-call dein#add('zhaocai/GoldenView.Vim')
-call dein#add('mhinz/vim-startify')
-call dein#add('trevordmiller/nova-vim')
-call dein#add('ervandew/supertab')
-call dein#add('sheerun/vim-polyglot')
-call dein#add('hail2u/vim-css3-syntax')
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-call dein#add('flazz/vim-colorschemes')
-call dein#add('mklabs/split-term.vim')
-call dein#add('wellle/targets.vim')
-call dein#add('neovim/node-host')
-call dein#add('tyru/open-browser.vim')
-call dein#add('kannokanno/previm')
-
-call dein#add('heavenshell/vim-jsdoc')
-call dein#add('fleischie/vim-styled-components')
-call dein#add('neoclide/vim-jsx-improve')
-
-" call dein#add('neoclide/tern-neovim', {
-" 			\ 'build': 'npm install',
-" 			\ 'if': 'executable("npm")',
-" 			\ 'on_i': 1,
-" 			\ 'on_ft': ['javascript', 'javascript.jsx']
-" 			\ })
-" 			\ })
-
-call dein#add('prettier/vim-prettier', {
-			\ 'build': 'npm install',
-			\ 'if': 'executable("npm")',
-			\ 'on_i': 1,
-			\ 'on_ft': ['javascript', 'javascript.jsx', 'typescript', 'css', 'less', 'scss', 'json']
-			\ })
-
-call dein#add('w0rp/ale')
-
-call dein#add('justinmk/vim-sneak')
-
-" Unite
-call dein#add('Shougo/unite.vim')
-call dein#add('vim-scripts/unite-colorscheme')
-call dein#add('sgur/unite-everything')
-call dein#add('Shougo/neomru.vim')
-
-call dein#add('Shougo/denite.nvim')
-call dein#add('nixprime/cpsm')
-call dein#add('neoclide/macnote.vim')
-call dein#add('chemzqm/denite-extra')
-call dein#add('neoclide/ultisnips')
-
-
-" Required:
-call dein#end()
-
-" Required:
-filetype plugin indent on
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-" End dein Scripts-------------------------
-
 " function to load all config files with .vim extension under
 " neovim config folder.
 function! s:LoadConfigs()
-  let paths = split(glob('$DOTFILES/nvim/*.vim'), "\n")
-  call filter(paths, 'v:val !~ "init.vim"')
+  source ~/dotfiles/nvim/dein.vim
 
-  for path in paths
-    exe 'source ' . path
-  endfor
+  source ~/dotfiles/nvim/general.vim
+  source ~/dotfiles/nvim/colorscheme.vim
+
+  source ~/dotfiles/nvim/autocomplete.vim
+
+  source ~/dotfiles/nvim/ale.vim
+  source ~/dotfiles/nvim/coffeescript.vim
+  source ~/dotfiles/nvim/denite.vim
+  source ~/dotfiles/nvim/fzf.vim
+  source ~/dotfiles/nvim/gist.vim
+  source ~/dotfiles/nvim/jsdoc.vim
+  source ~/dotfiles/nvim/lightline.vim
+  source ~/dotfiles/nvim/prettier.vim
+  source ~/dotfiles/nvim/previm.vim
+  source ~/dotfiles/nvim/sneak.vim
+  source ~/dotfiles/nvim/vimfiler.vim
+  source ~/dotfiles/nvim/remaps.vim
+
+  " Required:
+  filetype plugin indent on
+
+  " If you want to install not installed plugins on startup.
+  if dein#check_install()
+    call dein#install()
+  endif
 endfunc
 
 " load all config nvim configuration files
@@ -113,4 +45,3 @@ augroup reload_vimrc
   autocmd!
   autocmd bufwritepost $DOTFILES/nvim/*.vim nested source $MYVIMRC
 augroup END
-

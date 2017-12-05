@@ -5,6 +5,6 @@ let g:prettier#config#bracket_spacing = 'true'
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre *.js,*.json,*.css PrettierAsync
+  autocmd BufWritePre *.js,*.json,*.css,*.graphql,*.gql PrettierAsync
 augroup END
 

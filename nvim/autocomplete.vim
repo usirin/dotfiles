@@ -30,3 +30,11 @@ let g:deoplete#ignore_sources._ = ["neosnippet"]
 " imap <expr><C-TAB> <SID>my_neosnippet_expand()
 inoremap <expr><c-j> pumvisible() ? "\<c-n>" : "\<c-j>"
 inoremap <expr><c-k> pumvisible() ? "\<c-p>" : "\<c-k>"
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+
+autocmd FileType *
+\ if &omnifunc != '' |
+\   call SuperTabChain(&omnifunc, "<c-p>") |
+\ endif

@@ -47,4 +47,5 @@ function! s:find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
+command! ProjectAg execute 'Ag' s:find_git_root()
 

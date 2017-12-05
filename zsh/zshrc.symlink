@@ -18,9 +18,11 @@ if [[ -a ~/.localrc ]]; then
     source ~/.localrc
 fi
 
+# load autocompletions
+fpath=($ZSH_CUSTOM/completion $fpath)
+
 # initialize autocomplete
-autoload -U compinit
-compinit
+autoload -U compinit && compinit
 
 export EDITOR='nvim'
 
@@ -51,8 +53,15 @@ if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
 
-[ -z "$TMUX" ] && export TERM=xterm-256color
+# if [[ -z "$TMUX" ]]; then
+#   echo "in TMUX environment"
+#   export TERM=screen-256color
+# else
+#   echo "not in TMUX env"
+#   export TERM=screen-256color
+# fi
 
+export TERM=xterm-256color
 # alias git to hub
 if hash hub 2>/dev/null; then
     eval "$(hub alias -s)"
@@ -64,6 +73,8 @@ export NVM_DIR=$HOME/.nvm
 if hash brew 2>/dev/null; then
     source $(brew --prefix nvm)/nvm.sh
     source `brew --prefix`/etc/profile.d/z.sh
+else
+  source $NVM_DIR/nvm.sh
 fi
 
 # oh-my-zsh plugins
@@ -75,12 +86,12 @@ source $ZSH/oh-my-zsh.sh
 if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
   export GPG_AGENT_INFO
 else
-  eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+  eval $( gpg-agent --daemon ~/.gpg-agent-info )
 fi
-
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/bin/robomongo/bin:$PATH"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -91,7 +102,6 @@ export PATH="/Users/umutsirin/Library/Python/3.6/bin:$PATH"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvim
 
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/lib/gcloud/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/lib/gcloud/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -99,3 +109,7 @@ if [ -f '/usr/local/lib/gcloud/google-cloud-sdk/path.zsh.inc' ]; then source '/u
 if [ -f '/usr/local/lib/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/lib/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PATH="/usr/local/lib/kubernetes/bin:$PATH"
+
+export GPG_TTY=$(tty)
+
+. $DOTFILES/bin/z.sh

@@ -164,22 +164,3 @@ call denite#custom#map(
       \ 'noremap'
       \)
 
-nnoremap <silent> <space>p  :<C-u>Denite -resume<CR>
-nnoremap <silent> <space>j  :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
-nnoremap <silent> <space>k  :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
-
-nnoremap <silent> <space>w  :<C-u>DeniteCursorWord  -auto-resize line<CR>
-nnoremap <silent> <space>l  :<C-u>Denite -mode=normal location_list<CR>
-nnoremap <silent> <space>u  :<C-u>Denite ultisnips:all<cr>
-nnoremap <silent> <space>t  :<C-u>Denite project<cr>
-nnoremap <silent> <space>a  :<C-u>Denite node<CR>
-nnoremap <silent> <space>e  :<C-u>Denite buffer<cr>
-nnoremap <silent> <space>n  :<C-u>Denite note<cr>
-nnoremap <silent> <space>h  :<C-u>Denite history:all<cr>
-nnoremap <silent> <space>q  :<C-u>Denite commands<cr>
-nnoremap <silent> <space>f  :<C-u>Denite file_rec<cr>
-nnoremap <silent> <space>o  :<C-u>Denite outline<cr>
-
-nnoremap <silent> <C-f>f :<C-u>DeniteProjectDir grep<cr>
-nnoremap <silent> <leader>b  :<C-u>Denite buffer<cr>
-

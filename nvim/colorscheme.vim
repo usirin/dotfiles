@@ -9,7 +9,7 @@ hi Search guibg=NONE guifg=NONE gui=underline
 hi CursorLine ctermbg=NONE
 hi CursorLine guibg=NONE
 
-" hi ColorColumn ctermbg=DarkGray
+hi ColorColumn ctermbg=240 ctermfg=NONE
 
 " hi Cursor ctermfg=black ctermbg=white cterm=NONE
 " hi CursorIM ctermfg=black ctermbg=white cterm=reverse
