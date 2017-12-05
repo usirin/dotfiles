@@ -25,14 +25,14 @@
 
 [core]
   editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
-	excludesfile = /Users/umutsirin/.gitignore
+	excludesfile = /Users/umut/.gitignore
 
 [github]
   user = usirin
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -42,7 +42,7 @@
 	default = simple
 [commit]
 	gpgsign = true
-[gpg]
-  program = /Users/umutsirin/.gpgagent.sh
+; [gpg]
+;   program = /Users/umutsirin/.gpgagent.sh
 [rebase]
 	autostash = true
