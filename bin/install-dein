@@ -1,3 +1,10 @@
 #!/bin/sh
+REAL_PATH=~/.config/nvim/dein
+DOTFILES_PATH=$DOTFILES/nvim/dein
+
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/dein-installer.sh
-sh /tmp/dein-installer.sh $DOTFILES/nvim/dein
+sh /tmp/dein-installer.sh $DOTFILES_PATH
+ln -sf $DOTFILES_PATH $REAL_PATH
+
+rm /tmp/dein-installer.sh
+
