@@ -78,7 +78,7 @@ else
 fi
 
 # oh-my-zsh plugins
-plugins=(git brew npm)
+plugins=(git brew npm kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
