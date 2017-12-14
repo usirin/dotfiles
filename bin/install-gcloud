@@ -2,7 +2,7 @@
 OUT_DIR=${OUT_DIR:-"/usr/local/lib/gcloud"}
 compressed="${OUT_DIR}.tar.gz"
 
-curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-171.0.0-darwin-x86_64.tar.gz > $compressed
+curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-183.0.0-darwin-x86_64.tar.gz > $compressed
 mkdir -p $OUT_DIR
 tar xvzf $compressed -C $OUT_DIR
 $OUT_DIR/google-cloud-sdk/install.sh
