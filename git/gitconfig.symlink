@@ -27,6 +27,7 @@
 [core]
   editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 	excludesfile = /Users/umut/.gitignore
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [github]
   user = usirin
