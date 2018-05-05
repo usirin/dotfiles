@@ -15,6 +15,7 @@
   b  = branch -vv
   bd = branch -D
   logo = log --decorate --oneline
+  logf = log --graph --oneline
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
