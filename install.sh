@@ -11,8 +11,6 @@ if [ "$(uname)" == "Darwin" ]; then
   echo ">>> homebrew"
   source install/brew.sh
 
-  echo ">>> homebrew-cask"
-  source install/brew-cask.sh
 else
   echo "Running on Ubuntu"
 
@@ -37,5 +35,4 @@ echo "Configuring zsh as default shell"
 chsh -s $(which zsh)
 
 echo "Done!"
-
 

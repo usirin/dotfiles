@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const Crypto = require('crypto')
+
+const length = process.env.LENGTH ? Number(process.env.LENGTH) : 32
+
+console.log(
+  Crypto.randomBytes(length)
+    .toString('base64')
+    .slice(0, length)
+)

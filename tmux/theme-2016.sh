@@ -4,7 +4,7 @@
 
 # panes
 set -g pane-border-fg black
-set -g pane-active-border-fg brightred
+set -g pane-active-border-fg brightyellow
 
 ## Status bar design
 # status line
@@ -61,9 +61,9 @@ tm_color_feature=red
 tm_battery="#[fg=white,bg=colour240,bold] #{battery_percentage} "
 tm_date="#[fg=white,bg=red] %m/%d/%Y #[fg=white,bg=magenta,bold] %H:%M:%S"
 tm_spotify="#[fg=$tm_color_music,bg=colour246,bold]#(osascript ~/dotfiles/osx/spotify.scpt)"
-tm_session_name="#[fg=red]$tm_separator_right_thin #S $tm_separator_left_thin"
+tm_session_name="#[fg=green]$tm_separator_right_thin #S $tm_separator_left_thin"
 
-umut_battery_perc="#(pmset -g batt | awk 'NR==2 { gsub(/;/,""); print $2 }')"
+# umut_battery_perc="#(pmset -g batt | awk 'NR==2 { gsub(/;/,""); print $2 }')"
 setw -g window-status-current-fg colour81
 setw -g window-status-current-bg colour236
 setw -g window-status-current-attr bold
@@ -92,7 +92,7 @@ set -g status-bg colour234
 set -g status-fg colour51
 set -g status-attr dim
 set -g status-left "$tm_session_name"
-set -g status-right "#[fg=red]%A | %h-%d | %H:%M "
+set -g status-right "#[fg=magenta]%A | %h-%d | %H:%M "
 # set -g status-right $tm_battery'|'$tm_date' '$tm_spotify
 # set -g status-right-length 100
 set -g status-left-length 20

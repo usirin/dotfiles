@@ -20,8 +20,6 @@ brew install tig
 
 brew install git
 brew install hub
-brew install macvim --override-system-vim --with-cscope --with-lua
-brew linkapps macvim
 brew install reattach-to-user-namespace
 brew install tmux
 brew install unrar
@@ -30,10 +28,6 @@ brew install node
 brew install golang
 brew install python
 
-brew install mongodb
-brew install nginx
-brew install postgresql
-
 brew install gnupg
 
 echo "installing neovim..."
@@ -41,4 +35,4 @@ brew tap neovim/neovim
 brew install --HEAD neovim
 
 brew install gpg-agent
-brew install python3
+brew install gnupg

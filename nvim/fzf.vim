@@ -1,11 +1,11 @@
-let g:fzf_layout = { 'down': '20%' }
+let g:fzf_layout = { 'down': '40%' }
 
 function! s:fzf_statusline()
   " Override statusline as you like
   highlight fzf1 ctermfg=161 ctermbg=251
   highlight fzf2 ctermfg=23 ctermbg=251
   highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+  setlocal statusline=%#fzf1#\ ❯\ %#fzf2#fz%#fzf3#f
 endfunction
 
 " Customize fzf colors to match your color scheme
@@ -32,8 +32,8 @@ command! -bang -nargs=* GGrep
 
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \                         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
   \                 <bang>0)
 
 command! -bang -nargs=* Buffers
@@ -46,6 +46,24 @@ function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-command! ProjectFiles execute 'Files' s:find_git_root()
-command! ProjectAg execute 'Ag' s:find_git_root()
+function! nvim#fzf#find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
 
+command! ProjectFiles execute 'Files' s:find_git_root()
+command! ProjectAg execute 'Ag! ' . s:find_git_root()
+
+command! -bang -nargs=* FindInProject
+  \ call fzf#vim#grep('ag -S ' . shellescape(<q-args>) . ' ' . s:find_git_root(), 1,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+
+function! s:with_git_root()
+  let root = systemlist('git rev-parse --show-toplevel')[0]
+  return v:shell_error ? {} : {'dir': root}
+endfunction
+
+command! -nargs=* Rag
+  \ call fzf#vim#ag(<q-args>, extend(s:with_git_root(), fzf#vim#with_preview('up:60%'))

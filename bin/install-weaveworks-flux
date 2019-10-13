@@ -1,0 +1,16 @@
+#!/bin/sh
+
+VERSION=${1:-"1.6.0"}
+OUT=${2:-"/usr/local/bin/fluxctl"}
+
+if [ "$(uname)" == "Darwin" ]; then
+  PLATFORM=fluxctl_darwin_amd64
+else
+  PLATFORM=fluxctl_linux_amd64
+fi
+
+echo "downloading version: $VERSION platform: $PLATFORM"
+curl -L https://github.com/weaveworks/flux/releases/download/$VERSION/$PLATFORM > $OUT
+chmod +x $OUT
+
+fluxctl --help

@@ -1,7 +1,7 @@
-set -g default-shell /usr/bin/zsh
+set -g default-command "reattach-to-user-namespace -l zsh"
+# set -g default-shell /usr/bin/zsh
 
-# set -g default-command "reattach-to-user-namespace -l zsh"
-# tmux display things in 256 colors
+set-option -g default-terminal "screen-256color"
 
 set -g history-limit 20000
 
@@ -50,7 +50,7 @@ setw -g pane-base-index 1
 ######################
 
 # reload config file
-bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
+bind r display "Reloading config... " \; source-file ~/.tmux.conf \; display "Config Reloaded!"
 
 # quickly open a new window
 bind N new-window
@@ -60,7 +60,7 @@ bind | split-window -h -c "#{pane_current_path}"
 bind - split-window -v -c "#{pane_current_path}"
 
 # synchronize all panes in a window
-bind y setw synchronize-panes
+bind D setw synchronize-panes
 
 # pane movement shortcuts
 bind h select-pane -L
@@ -127,8 +127,8 @@ bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-
 source ~/dotfiles/tmux/theme-2016.sh
 
 # so that nvim can show pipe in insert mode as cursor shape.
-set -g -a terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
-set-option -ga terminal-overrides ',xterm-256color:Tc'
+# set -g -a terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+# set-option -ga terminal-overrides ',xterm-256color:Tc'
 
 
 # Tmux Plugin Manager list of plugins
@@ -149,5 +149,5 @@ set -g @resurrect-strategy-vim 'session'
 # Initialize TMUX plugin manager
 run '~/.tmux/plugins/tpm/tpm'
 
-set -g default-terminal "xterm-256color"
+# set -g default-terminal "xterm-256color"
 

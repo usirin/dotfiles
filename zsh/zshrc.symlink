@@ -69,13 +69,7 @@ fi
 
 # source nvm
 export NVM_DIR=$HOME/.nvm
-
-if hash brew 2>/dev/null; then
-    source $(brew --prefix nvm)/nvm.sh
-    source `brew --prefix`/etc/profile.d/z.sh
-else
-  source $NVM_DIR/nvm.sh
-fi
+source $NVM_DIR/nvm.sh
 
 # oh-my-zsh plugins
 plugins=(git brew npm kubectl)
@@ -103,6 +97,7 @@ export PATH="/Users/umutsirin/Library/Python/3.6/bin:$PATH"
 export NVIM_LISTEN_ADDRESS=/tmp/nvim
 
 export PATH="/usr/local/lib/kubernetes/bin:$PATH"
+export PATH="/Users/umut.sirin/.deno/bin:$PATH"
 
 export GPG_TTY=$(tty)
 
@@ -113,3 +108,16 @@ if [ -f '/usr/local/lib/gcloud/google-cloud-sdk/path.zsh.inc' ]; then source '/u
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/usr/local/lib/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/lib/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export PATH=/Users/umutsirin/.rvm/gems/ruby-2.3.0/bin:/Users/umutsirin/.rvm/gems/ruby-2.3.0@global/bin:/Users/umutsirin/.rvm/rubies/ruby-2.3.0/bin:/usr/local/lib/gcloud/google-cloud-sdk/bin:/usr/local/lib/kubernetes/bin:/Users/umutsirin/Library/Python/3.6/bin:/Users/umutsirin/.yarn/bin:/usr/local/bin/robomongo/bin:/usr/local/opt/coreutils/libexec/gnubin:/Users/umutsirin/dotfiles/bin:/usr/local/sbin:/usr/local/bin:/Users/umutsirin/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/opt/X11/bin:/usr/local/lib/gcloud/google-cloud-sdk/bin:/usr/local/lib/kubernetes/bin:/Users/umutsirin/Library/Python/3.6/bin:/Users/umutsirin/.yarn/bin:/usr/local/bin/robomongo/bin:/usr/local/opt/coreutils/libexec/gnubin:/Users/umutsirin/dotfiles/bin:/usr/local/sbin:/Users/umutsirin/.rvm/bin:/Users/umutsirin/dotfiles/nvim/dein/repos/github.com/junegunn/fzf/bin:/usr/local/go/bin:/Users/umutsirin/.rvm/bin:/Users/umutsirin/istio-0.8.0/bin
+
+export LC_TYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export HOMEBREW_GITHUB_API_TOKEN=3a5642b66456c8672621785b8b1f30e30716d656
+
+export GRAFANA_API_KEY=eyJrIjoicG5ja05YcWNWbnB0Tkg4bkV2anVTemxNM29IbFBNbkkiLCJuIjoiZnJvbnRlbmQiLCJpZCI6MX0
+export GRAFANA_SERVER=grafana.mysamba.tv
+export GRAFANA_PORT=443
+export GRAFANA_SECURE=1
+export GRAFANA_URL=https://grafana.mysamba.tv/api/annotations

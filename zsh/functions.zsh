@@ -5,7 +5,6 @@ CLR_BOLD_YELLOW='\033[1;33m'
 TICK="✓"
 ARROW="▸"
 DOT="●"
-
 GREEN_TICK="${CLR_BOLD_GREEN}${TICK}${CLR_RESET}"
 YELLOW_ARROW="${CLR_BOLD_YELLOW}${ARROW}${CLR_RESET}"
 
@@ -98,3 +97,58 @@ ensure_line() {
   FILE=$2
   grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
 }
+
+tm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
+microverse-webmaster-node-payment-0 () {
+  microverse-webmaster-node-payment \
+    --id payment-0 \
+    --site-domain localhost:3064 \
+    --port 3064 \
+    --node-port 3054 \
+    --node-url ws://localhost:3054 \
+    --bootstrap-url ws://bootstrap.test.webmaster.microverse.io:3040 \
+    --stripe-secret-key sk_test_ZHaSKpy3LCdWxCeJzopQYNeK
+}
+
+github-latest() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+    grep '"tag_name":' |                                            # Get tag line
+    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
+}
+
+check-tunnel () {
+  pgrep -f 'ssh -f'
+}
+
+kill-tunnel () {
+  pkill -f 'ssh -f'
+}
+
+mount-platform-dev () {
+  ssh -f -N \
+    -L 5433:samba-platform-api-dev.cxtg2qgzoexk.us-west-2.rds.amazonaws.com:5432 \
+    admin@ec2-18-236-226-206.us-west-2.compute.amazonaws.com \
+    -i /Users/umut.sirin/.ssh/umut.sirin@samba.tv
+}
+
+mount-platform-prod () {
+  ssh -f -N \
+    -L 5434:samba-platform-api-prod.cxtg2qgzoexk.us-west-2.rds.amazonaws.com:5432 \
+    admin@ec2-34-209-203-126.us-west-2.compute.amazonaws.com \
+    -i /Users/umut.sirin/.ssh/umut.sirin@samba.tv
+}
+
+mount-platform-staging () {
+  ssh -f -N \
+    -L 5435:samba-platform-api-stg.cxtg2qgzoexk.us-west-2.rds.amazonaws.com:5432 \
+    admin@ec2-34-215-99-23.us-west-2.compute.amazonaws.com \
+    -i /Users/umut.sirin/.ssh/umut.sirin@samba.tv
+}
+

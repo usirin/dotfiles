@@ -1,4 +1,4 @@
-syntax enable
+syntax on
 
 set mouse=a
 set visualbell
@@ -16,6 +16,7 @@ set splitbelow
 set backspace=indent,eol,start
 set number
 set nowrap
+set hidden
 
 set noshowmode
 
@@ -39,8 +40,11 @@ set winwidth=79
 set winheight=5
 set winminheight=5
 set winminwidth=40
+set diffopt+=vertical
 
 set scrolloff=5
+
+set inccommand=split
 
 set laststatus=2
 set statusline=%f\ %=L:%l/%L\ %c\ (%p%%)
@@ -56,11 +60,11 @@ set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Enable true color support so that we can see colors awesome.
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " persist undos across sessions
 try
-  set undodir=$DOTFILES/nvim/temp_dirs/undodir
+  set undodir=$HOME/dotfiles/nvim/temp_dirs/undodir
   set undofile
 catch
 endtry
@@ -75,8 +79,9 @@ autocmd BufEnter * silent! lcd %:p:h
 autocmd BufWritePre * :%s/\s\+$//e
 
 " File specific color columns
-autocmd BufNewFile,BufReadPost *.coffee,*.js,*.litcoffee setl colorcolumn=80
+autocmd BufNewFile,BufReadPost *.coffee,*.js,*.litcoffee setl colorcolumn=80,120
 autocmd BufNewFile,BufReadPost *.styl,*.stylus setl colorcolumn=28
+autocmd BufNewFile,BufReadPost .babelrc,.eslintrc,.prettierrc set filetype=json
 
 autocmd FileType java setlocal shiftwidth=4 tabstop=4
 

@@ -1,9 +1,10 @@
 [user]
 	name = Umut Sirin
 	email = umutsirin1@gmail.com
+  signingkey = 58A3D5355E159D35
 
 [alias]
-  st = status
+  st = status --untracked-files
   ci = commit
   cian = commit --amend --no-edit
   co = checkout
@@ -19,10 +20,17 @@
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
-  pr = pull --rebase
+  p = pull --rebase
   g = grep --break --heading --line-number
-  url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+:\\(.+\\)\\.git$/https:\\\\/\\\\/github\\\\.com\\\\/\\\\1/g"'
+  url =! bash -c 'git config --get remote.origin.url | sed -E "s/git@\\(.+\\)\\:\\(.+\\)\\.git$/https:\\\\/\\\\/\\\\1\\\\/\\\\2/g"'
   open =! bash -c 'git url | xargs open'
+  ignore = update-index --assume-unchanged
+  unignore = update-index --no-assume-unchanged
+  ignored =! git ls-files -v | grep ^[a-z]
+  prom = pull --rebase origin master
+  pom = push origin master
+  undo = reset HEAD~1
+  wip =! bash -c 'git add --all && git commit -m wip'
 
 [core]
   editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
@@ -42,9 +50,12 @@
 	keepBackup = true
 [push]
 	default = simple
-[commit]
-	gpgsign = true
-; [gpg]
-;   program = /Users/umutsirin/.gpgagent.sh
+; [commit]
+; 	gpgsign = true
+[gpg]
+  program = /Users/umut.sirin/.gpgagent.sh
 [rebase]
 	autostash = true
+[credential]
+	helper = !aws codecommit credential-helper $@
+	UseHttpPath = true

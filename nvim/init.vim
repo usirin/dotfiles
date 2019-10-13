@@ -8,17 +8,25 @@ set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 " function to load all config files with .vim extension under
 " neovim config folder.
 function! s:LoadConfigs()
+  " this includes all packages do not add any package installation code into
+  " any other file other than this.
   source ~/dotfiles/nvim/dein.vim
 
   source ~/dotfiles/nvim/general.vim
   source ~/dotfiles/nvim/colorscheme.vim
 
   source ~/dotfiles/nvim/autocomplete.vim
+  " source ~/dotfiles/nvim/deoplete.vim
+  source ~/dotfiles/nvim/neosnippet.vim
+  source ~/dotfiles/nvim/language-client.vim
 
   source ~/dotfiles/nvim/ale.vim
   source ~/dotfiles/nvim/coffeescript.vim
+  source ~/dotfiles/nvim/rust.vim
+  source ~/dotfiles/nvim/yaml.vim
   source ~/dotfiles/nvim/denite.vim
   source ~/dotfiles/nvim/fzf.vim
+  source ~/dotfiles/nvim/fugitive.vim
   source ~/dotfiles/nvim/gist.vim
   source ~/dotfiles/nvim/jsdoc.vim
   source ~/dotfiles/nvim/lightline.vim

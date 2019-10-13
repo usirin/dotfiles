@@ -1,0 +1,37 @@
+#!/bin/bash
+
+kops_cluster=$1
+
+set -e
+
+run () {
+  echo "running $@"
+  $@
+}
+
+sg_nodes=$(aws ec2 describe-security-groups --filters Name=group-name,Values=nodes.$kops_cluster)
+vpc_nodes=$(echo $sg_nodes | jq '.["SecurityGroups"][0]["VpcId"]' -r)
+
+# run ls -lah
+
+# run aws ec2 create-security-group --description ingress.$kops_cluster --group-name ingress.$kops_cluster --vpc-id $vpc_nodes
+# run aws ec2 describe-security-groups --filters Name=vpc-id,Values=$vpc_nodes
+
+sg_ingress=$(aws ec2 describe-security-groups --filters Name=group-name,Values=ingress.$kops_cluster)
+
+sgidingress=$(echo $sg_ingress | jq '.["SecurityGroups"][0]["GroupId"]' -r)
+sgidnode=$(echo $sg_nodes | jq '.["SecurityGroups"][0]["GroupId"]' -r)
+
+echo $sgidingress
+echo $sgidnode
+
+# run aws ec2 authorize-security-group-ingress --group-id $sgidingress --protocol tcp --port 443 --cidr 0.0.0.0/0
+# run aws ec2 authorize-security-group-ingress --group-id $sgidingress --protocol tcp --port 80 --cidr 0.0.0.0/0
+
+# run aws ec2 authorize-security-group-ingress --group-id $sgidnode --protocol all --port -1 --source-group $sgidingress
+run aws ec2 authorize-security-group-ingress --group-id $sgidnode --protocol all --port -1 --source-group $sgidingress
+
+# run aws ec2 authorize-security-group-ingress --group-id $sgidingress --protocol all --port -1 --source-group $sgidnode
+# run aws ec2 create-tags --resources $sgidingress --tags "kubernetes.io/cluster/$kops_cluster=owned" "kubernetes:application=kube-ingress-aws-controller"
+run aws ec2 authorize-security-group-egress --group-id $sgidingress --protocol all --port -1 --cidr 0.0.0.0/0
+

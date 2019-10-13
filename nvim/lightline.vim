@@ -1,11 +1,23 @@
 let g:lightline = {
-    \ 'colorscheme': 'Tomorrow_Night',
+    \ 'component_expand': {
+    \   'linter_checking': 'lightline#ale#checking',
+    \   'linter_warnings': 'lightline#ale#warnings',
+    \   'linter_errors': 'lightline#ale#errors',
+    \   'linter_ok': 'lightline#ale#ok',
+    \ },
+    \ 'component_type': {
+    \   'linter_checking': 'left',
+    \   'linter_warnings': 'warning',
+    \   'linter_errors': 'error',
+    \   'linter_ok': 'left',
+    \ },
     \ 'component_function': {
     \   'fugitive': 'LightLineFugitive',
     \   'filename': 'LightLineFilename'
     \ },
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
+    \   'left': [
+    \             [ 'mode', 'paste' ],
     \             [ 'fugitive' ],
     \             [ 'readonly', 'filename', 'modified' ] ],
     \   'right': [ [ 'lineinfo' ],
@@ -27,7 +39,13 @@ function! LightLineReadonly()
 endfunction
 
 function! LightLineFilename()
-  let shortened_filename = GetFishLikePath(expand('%:p'), 2)
+  let full_name = expand('%:p')
+
+  if len(full_name) ==# 0
+    return ''
+  endif
+
+  let shortened_filename = GetFishLikePath(full_name, 2)
   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
   \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
   \  &ft == 'unite' ? unite#get_status_string() :
