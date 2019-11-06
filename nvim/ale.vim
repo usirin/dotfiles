@@ -9,3 +9,5 @@ let g:ale_fixers.javascript = ['prettier']
 let g:ale_fixers.typescript = ['prettier']
 " let g:ale_javascript_eslint_use_global=1
 
+nmap <silent> ]q <Plug>(ale_next_wrap)
+nmap <silent> [q <Plug>(ale_previous_wrap)

@@ -35,6 +35,7 @@ function! s:LoadConfigs()
   source ~/dotfiles/nvim/sneak.vim
   source ~/dotfiles/nvim/vimfiler.vim
   source ~/dotfiles/nvim/remaps.vim
+  source ~/dotfiles/nvim/ctrlsf.vim
 
   " Required:
   filetype plugin indent on

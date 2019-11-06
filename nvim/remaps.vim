@@ -90,6 +90,6 @@ nmap <silent> <C-g>t <Plug>GoldenViewSwitchToggle
 nmap <silent> <C-g>n  <Plug>GoldenViewNext
 nmap <silent> <C-g>N  <Plug>GoldenViewPrevious
 
-nnoremap <leader>kb :VimFilerBufferDir -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<cr>
+nnoremap <leader>kb :VimFilerBufferDir -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
 
 nnoremap <leader>j :ProjectRootExe Term npx jest --findRelatedTests expand("%:p")<cr>

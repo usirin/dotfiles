@@ -35,7 +35,7 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set shiftround
-set nocursorline
+set cursorline
 set winwidth=79
 set winheight=5
 set winminheight=5

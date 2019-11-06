@@ -1,7 +1,7 @@
 set termguicolors
 
-colorscheme onedark
-" set bg=dark
+colorscheme one
+set bg=dark
 
 " show only an underline behind the matched words
 hi Search ctermbg=NONE ctermfg=NONE cterm=underline

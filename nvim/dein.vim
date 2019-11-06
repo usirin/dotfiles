@@ -72,6 +72,10 @@ call dein#add('joshdick/onedark.vim')
 
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
+call dein#add('rakr/vim-one')
+call dein#add('sonph/onehalf')
+
+call dein#add('dyng/ctrlsf.vim')
 
 
 " Required:
