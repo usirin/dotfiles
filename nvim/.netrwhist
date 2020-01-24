@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/umutsirin/.vim'
+let g:netrw_dirhist_2='/Users/umutsirin/.vim/dein'
+let g:netrw_dirhist_3='/Users/umutsirin/.vim/dein/repos'
+let g:netrw_dirhist_4='/Users/umutsirin/.vim/dein/repos/github.com'
