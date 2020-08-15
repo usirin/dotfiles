@@ -26,3 +26,5 @@ alias y='yarn'
 
 alias atom-beta='atom-beta --enable-gpu-rasterization'
 
+alias amp='amplify'
+

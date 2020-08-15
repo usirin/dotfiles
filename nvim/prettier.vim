@@ -12,8 +12,6 @@ let g:prettier#config#single_quote = 'false'
 let g:prettier#config#bracket_spacing = 'true'
 " put > on the last line instead of new line
 let g:prettier#config#jsx_bracket_same_line = 'false'
-" none|es5|all
-let g:prettier#config#trailing_comma = 'none'
 " flow|babylon|typescript|css|less|scss|json|graphql|markdown
 let g:prettier#config#parser = 'babylon'
 " cli-override|file-override|prefer-file
@@ -25,7 +23,7 @@ let g:prettier#config#html_whitespace_sensitivity = 'css'
 
 augroup fmt
   autocmd!
-  " autocmd BufWritePre *.mjs,*.js,*.graphql,*.gql PrettierAsync
-  autocmd BufWritePre *.ts,*.tsx PrettierAsync
+  autocmd BufWritePre *.mjs,*.js,*.graphql,*.gql Prettier
+  " autocmd BufWritePre *.tsx Prettier
 augroup END
 

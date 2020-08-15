@@ -27,6 +27,7 @@ brew install unrar
 brew install node
 brew install golang
 brew install python
+brew install bat
 
 brew install gnupg
 

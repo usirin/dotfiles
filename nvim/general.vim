@@ -36,10 +36,10 @@ set tabstop=2
 set shiftwidth=2
 set shiftround
 set cursorline
-set winwidth=79
-set winheight=5
-set winminheight=5
-set winminwidth=40
+" set winwidth=79
+" set winminheight=1
+" set winheight=1
+" set winminwidth=40
 set diffopt+=vertical
 
 set scrolloff=5
@@ -79,7 +79,7 @@ autocmd BufEnter * silent! lcd %:p:h
 autocmd BufWritePre * :%s/\s\+$//e
 
 " File specific color columns
-autocmd BufNewFile,BufReadPost *.coffee,*.js,*.litcoffee setl colorcolumn=80,120
+autocmd BufNewFile,BufReadPost *.coffee,*.js,*.litcoffee,*.ts,*.tsx setl colorcolumn=80,120
 autocmd BufNewFile,BufReadPost *.styl,*.stylus setl colorcolumn=28
 autocmd BufNewFile,BufReadPost .babelrc,.eslintrc,.prettierrc set filetype=json
 
@@ -87,3 +87,7 @@ autocmd FileType java setlocal shiftwidth=4 tabstop=4
 
 autocmd FileType litcoffee runtime ftplugin/coffee.vim
 
+augroup QuickFixStuff
+  autocmd!
+  autocmd FileType qf setlocal wrap
+augroup END

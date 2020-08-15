@@ -13,7 +13,7 @@ nnoremap ; :
 nnoremap <Enter> o<Esc>
 
 " Remove search highlight
-nnoremap <leader><space> :nohlsearch<cr>
+nnoremap <leader><space> :nohlsearch<cr><Plug>(coc-float-hide)<cr>
 
 " Shortcut for :b# (switch to alternate buffer)
 nnoremap <leader><leader> <c-^>
@@ -67,29 +67,18 @@ nnoremap <C-p> :ProjectRootExe Files<cr>
 nnoremap <C-t> :GFiles<cr>
 
 
-nnoremap <silent> <C-f>f :<C-u>ProjectRootExe Ag! <cr>
-nnoremap <silent> <leader>b  :<C-u>Buffers<cr>
+nnoremap <silent> <C-f>f :<C-u>ProjectRootExe Ag <cr>
+vnoremap <silent> <C-f>f y:ProjectRootExe Ag <C-r>=fnameescape(@")<CR><CR>
+nnoremap <silent> <leader>b :<C-u>Buffers<cr>
 
 " tabularize
 map <leader>: :Tabularize /:<cr>
 map <leader>= :Tabularize /=<cr>
 map <leader>" :Tabularize /"<cr>
 
-" goldenview
-let g:goldenview__enable_default_mapping = 0
-
-" 1. split to tiled windows
-nmap <silent> <C-g><C-g> :GoldenViewResize<cr>
-
-" 2. quickly switch current window with the main pane
-" and toggle back
-nmap <silent> <C-g>m <Plug>GoldenViewSwitchMain
-nmap <silent> <C-g>t <Plug>GoldenViewSwitchToggle
-
-" 3. jump to next and previous window
-nmap <silent> <C-g>n  <Plug>GoldenViewNext
-nmap <silent> <C-g>N  <Plug>GoldenViewPrevious
-
 nnoremap <leader>kb :VimFilerBufferDir -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
 
 nnoremap <leader>j :ProjectRootExe Term npx jest --findRelatedTests expand("%:p")<cr>
+
+nmap <leader>rn :call CocAction('rename')<cr>
+nmap Y y$

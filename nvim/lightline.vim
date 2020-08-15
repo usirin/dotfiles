@@ -14,14 +14,17 @@ let g:lightline = {
     \ },
     \ 'component_function': {
     \   'fugitive': 'LightLineFugitive',
-    \   'filename': 'LightLineFilename'
+    \   'filename': 'LightLineFilename',
+    \   'cocstatus': 'coc#status',
+    \   'currentfunction': 'CocCurrentFunction'
     \ },
     \ 'active': {
     \   'left': [
     \             [ 'mode', 'paste' ],
     \             [ 'fugitive' ],
     \             [ 'readonly', 'filename', 'modified' ] ],
-    \   'right': [ [ 'lineinfo' ],
+    \   'right': [ ['cocstatus', 'currentfunction'],
+    \              [ 'lineinfo' ],
     \              [ 'filetype' ] ]
     \ },
     \ 'inactive': {
@@ -98,3 +101,15 @@ function! LightLineFugitive()
   return ''
 endfunction
 
+fun CocCurrentFunction()
+  return get(b:, 'coc_current_function', '')
+endf
+
+fun OmniType()
+  let type = OmniSharp#actions#documentation#TypeLookup()
+
+  return type == 0 ? "" : type
+endf
+
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()

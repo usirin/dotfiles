@@ -99,6 +99,10 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvim
 export PATH="/usr/local/lib/kubernetes/bin:$PATH"
 export PATH="/Users/umut.sirin/.deno/bin:$PATH"
 
+export GOPATH="$HOME/code/go"
+export PATH="${GOPATH//://bin:}/bin:$PATH"
+export PATH=$HOME/.toolbox/bin:$PATH
+
 export GPG_TTY=$(tty)
 
 . $DOTFILES/bin/z.sh
@@ -121,3 +125,4 @@ export GRAFANA_SERVER=grafana.mysamba.tv
 export GRAFANA_PORT=443
 export GRAFANA_SECURE=1
 export GRAFANA_URL=https://grafana.mysamba.tv/api/annotations
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)

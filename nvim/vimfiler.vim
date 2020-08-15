@@ -10,6 +10,8 @@ let g:vimfiler_tree_closed_icon = "▸"
 let g:vimfiler_readonly_file_icon = "✗"
 let g:vimfiler_marked_file_icon = "✓"
 
+autocmd FileType vimfiler setlocal nonumber
+
 
 " open a vimfiler buffer automatically when Vim starts up if no
 " files(arguments) were specified

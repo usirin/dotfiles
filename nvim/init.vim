@@ -15,27 +15,29 @@ function! s:LoadConfigs()
   source ~/dotfiles/nvim/general.vim
   source ~/dotfiles/nvim/colorscheme.vim
 
-  source ~/dotfiles/nvim/autocomplete.vim
-  " source ~/dotfiles/nvim/deoplete.vim
+  source ~/dotfiles/nvim/coc.vim
   source ~/dotfiles/nvim/neosnippet.vim
-  source ~/dotfiles/nvim/language-client.vim
 
-  source ~/dotfiles/nvim/ale.vim
+  source ~/dotfiles/nvim/golang.vim
+  source ~/dotfiles/nvim/omnisharp.vim
+
   source ~/dotfiles/nvim/coffeescript.vim
   source ~/dotfiles/nvim/rust.vim
   source ~/dotfiles/nvim/yaml.vim
+  source ~/dotfiles/nvim/typescript.vim
   source ~/dotfiles/nvim/denite.vim
   source ~/dotfiles/nvim/fzf.vim
   source ~/dotfiles/nvim/fugitive.vim
   source ~/dotfiles/nvim/gist.vim
-  source ~/dotfiles/nvim/jsdoc.vim
   source ~/dotfiles/nvim/lightline.vim
-  source ~/dotfiles/nvim/prettier.vim
-  source ~/dotfiles/nvim/previm.vim
   source ~/dotfiles/nvim/sneak.vim
   source ~/dotfiles/nvim/vimfiler.vim
-  source ~/dotfiles/nvim/remaps.vim
+  source ~/dotfiles/nvim/defx.vim
   source ~/dotfiles/nvim/ctrlsf.vim
+  source ~/dotfiles/nvim/indent-guides.vim
+  source ~/dotfiles/nvim/gitgutter.vim
+
+  source ~/dotfiles/nvim/remaps.vim
 
   " Required:
   filetype plugin indent on

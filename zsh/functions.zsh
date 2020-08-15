@@ -131,24 +131,6 @@ kill-tunnel () {
   pkill -f 'ssh -f'
 }
 
-mount-platform-dev () {
-  ssh -f -N \
-    -L 5433:samba-platform-api-dev.cxtg2qgzoexk.us-west-2.rds.amazonaws.com:5432 \
-    admin@ec2-18-236-226-206.us-west-2.compute.amazonaws.com \
-    -i /Users/umut.sirin/.ssh/umut.sirin@samba.tv
+gitroot () {
+  git rev-parse --show-toplevel
 }
-
-mount-platform-prod () {
-  ssh -f -N \
-    -L 5434:samba-platform-api-prod.cxtg2qgzoexk.us-west-2.rds.amazonaws.com:5432 \
-    admin@ec2-34-209-203-126.us-west-2.compute.amazonaws.com \
-    -i /Users/umut.sirin/.ssh/umut.sirin@samba.tv
-}
-
-mount-platform-staging () {
-  ssh -f -N \
-    -L 5435:samba-platform-api-stg.cxtg2qgzoexk.us-west-2.rds.amazonaws.com:5432 \
-    admin@ec2-34-215-99-23.us-west-2.compute.amazonaws.com \
-    -i /Users/umut.sirin/.ssh/umut.sirin@samba.tv
-}
-

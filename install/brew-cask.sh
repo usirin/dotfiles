@@ -14,13 +14,10 @@ echo "Installing homebrew-cask packages..."
 brew cask install virtualbox
 brew cask install google-chrome
 brew cask install google-drive
-brew cask install sublime-text
 brew cask install slack
 brew cask install 1password
-brew cask install moom
 brew cask install spotify
 
 brew cask install adobe-creative-cloud
 brew cask install gpgtools
-brew cask install robomongo
 brew cask install sketch

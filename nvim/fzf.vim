@@ -1,4 +1,5 @@
-let g:fzf_layout = { 'down': '40%' }
+" let g:fzf_layout = { 'down': '40%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
 
 function! s:fzf_statusline()
   " Override statusline as you like
@@ -33,7 +34,7 @@ command! -bang -nargs=* GGrep
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \                         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \                         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%', '?'),
   \                 <bang>0)
 
 command! -bang -nargs=* Buffers
@@ -51,14 +52,6 @@ function! nvim#fzf#find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
-command! ProjectAg execute 'Ag! ' . s:find_git_root()
-
-command! -bang -nargs=* FindInProject
-  \ call fzf#vim#grep('ag -S ' . shellescape(<q-args>) . ' ' . s:find_git_root(), 1,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
-
 
 function! s:with_git_root()
   let root = systemlist('git rev-parse --show-toplevel')[0]

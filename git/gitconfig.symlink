@@ -1,7 +1,6 @@
 [user]
-	name = Umut Sirin
-	email = umutsirin1@gmail.com
-  signingkey = 58A3D5355E159D35
+	name = ussirin
+	email = ussirin@justin.tv
 
 [alias]
   st = status --untracked-files
@@ -34,8 +33,18 @@
 
 [core]
   editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
-	excludesfile = /Users/umut/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = /Users/ussirin/.gitignore
+	; pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  side-by-side = true
+  ; plus-color = "#012800"
+  ; minus-color = "#340001"
+  syntax-theme = OneHalfDark
 
 [github]
   user = usirin
@@ -56,6 +65,11 @@
   program = /Users/umut.sirin/.gpgagent.sh
 [rebase]
 	autostash = true
-[credential]
-	helper = !aws codecommit credential-helper $@
-	UseHttpPath = true
+; [credential]
+; 	helper = !aws codecommit credential-helper $@
+; 	UseHttpPath = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

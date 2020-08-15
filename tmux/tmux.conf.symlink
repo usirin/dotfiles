@@ -119,7 +119,6 @@ bind -Tcopy-mode-vi y send -X copy-selection
 bind C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
 bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-buffer"
 
-
 ##############################
 ### Color & Style Settings ###
 ##############################

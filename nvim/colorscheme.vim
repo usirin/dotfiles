@@ -1,12 +1,5 @@
 set termguicolors
 
-colorscheme onedark
-set bg=dark
-
-" show only an underline behind the matched words
-hi Search ctermbg=NONE ctermfg=NONE cterm=underline
-hi Search guibg=NONE guifg=NONE gui=underline
-
 " this is to make only numbers colored up
 " hi CursorLine ctermbg=NONE
 " hi CursorLine guibg=NONE
@@ -33,3 +26,11 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
+
+set bg=dark
+colorscheme one
+
+" show only an underline behind the matched words
+hi Search ctermbg=NONE ctermfg=NONE cterm=underline
+hi Search guibg=NONE guifg=NONE gui=underline
+
