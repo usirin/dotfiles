@@ -43,6 +43,34 @@ command! -bang -nargs=* Buffers
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
+function! RipgrepFzf(argv, fullscreen)
+  let command_args = [
+        \ '--column',
+        \ '--line-number',
+        \ '--no-heading',
+        \ '--color=always',
+        \ '--smart-case',
+        \ ]
+
+  let extra_commands = []
+  let query = ''
+  let paramlist = split(a:argv, ' ')
+
+  if len(paramlist) > 0
+    let extra_commands = paramlist[0:-2]
+    let query = paramlist[-1]
+  endif
+
+  let command_fmt = 'rg ' . join(command_args + extra_commands, ' ') . ' -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+nnoremap <Leader>/ :RG<Space>
+
+
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
@@ -60,3 +88,4 @@ endfunction
 
 command! -nargs=* Rag
   \ call fzf#vim#ag(<q-args>, extend(s:with_git_root(), fzf#vim#with_preview('up:60%'))
+

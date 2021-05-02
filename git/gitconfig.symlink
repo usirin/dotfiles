@@ -1,6 +1,6 @@
 [user]
-	name = ussirin
-	email = ussirin@justin.tv
+	name = usirin
+	email = umutsirin1@gmail.com
 
 [alias]
   st = status --untracked-files
@@ -29,7 +29,8 @@
   prom = pull --rebase origin master
   pom = push origin master
   undo = reset HEAD~1
-  wip =! bash -c 'git add --all && git commit -m wip'
+  wip =! bash -c 'git add --all && git commit -m wip --no-verify'
+	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
 
 [core]
   editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
@@ -62,7 +63,7 @@
 ; [commit]
 ; 	gpgsign = true
 [gpg]
-  program = /Users/umut.sirin/.gpgagent.sh
+	program = /usr/local/bin/gpg
 [rebase]
 	autostash = true
 ; [credential]
@@ -73,3 +74,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[commit]
+	gpgsign = false
+[init]
+	defaultBranch = main

@@ -11,6 +11,8 @@ set ttyfast
 set autowrite
 set autoread
 
+set re=0
+
 set splitright
 set splitbelow
 set backspace=indent,eol,start

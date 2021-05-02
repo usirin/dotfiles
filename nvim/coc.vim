@@ -1,3 +1,5 @@
+let g:coc_node_path = '/Users/ussirin/.nvm/versions/node/v15.12.0/bin/node'
+
 " Better display for messages
 set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -53,10 +55,11 @@ nmap <silent> [q <Plug>(coc-diagnostic-prev)
 nmap <silent> ]q <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gf <Plug>(coc-definition)
-nmap <silent> <C-g>f :vsplit<cr><Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gf <Plug>(coc-implementation)
+nmap <silent> <C-g>f :vsplit<cr><Plug>(coc-implementation)
+nmap <silent> gt <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -72,7 +75,6 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -91,7 +93,7 @@ xmap <leader>c  <Plug>(coc-codeaction-selected)
 nmap <leader>c  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>d  <Plug>(coc-codeaction)
+nmap <leader>d  :CocAction<cr>
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -139,5 +141,7 @@ nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
-xmap <silent> <leader>d :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>d :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+" " xmap <silent> <leader>d :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+" vmap <silent> <leader>d :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>
+nmap <leader>w <Plug>(coc-codeaction)
+vmap <leader>w <Plug>(coc-codeaction-selected)

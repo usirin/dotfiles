@@ -1,11 +1,5 @@
 let g:lightline = {
-    \ 'colorscheme': 'one',
-    \ 'component_expand': {
-    \   'linter_checking': 'lightline#ale#checking',
-    \   'linter_warnings': 'lightline#ale#warnings',
-    \   'linter_errors': 'lightline#ale#errors',
-    \   'linter_ok': 'lightline#ale#ok',
-    \ },
+    \ 'colorscheme': 'gotham',
     \ 'component_type': {
     \   'linter_checking': 'left',
     \   'linter_warnings': 'warning',
@@ -21,11 +15,13 @@ let g:lightline = {
     \ 'active': {
     \   'left': [
     \             [ 'mode', 'paste' ],
+    \             [ 'readonly', 'filename', 'modified' ],
     \             [ 'fugitive' ],
-    \             [ 'readonly', 'filename', 'modified' ] ],
-    \   'right': [ ['cocstatus', 'currentfunction'],
+    \   ],
+    \   'right': [ ['cocstatus'],
     \              [ 'lineinfo' ],
-    \              [ 'filetype' ] ]
+    \              [ 'filetype' ],
+    \   ],
     \ },
     \ 'inactive': {
     \   'left': [ [ 'filename', 'fugitive' ] ],
@@ -61,8 +57,8 @@ function! LightLineFilename()
 endfunction
 
 function! SubstituteHome(filename)
-  let TILDA = '~'
-  return substitute(a:filename, $HOME, TILDA, '')
+  let TILDE = '~'
+  return substitute(a:filename, $HOME, TILDE, '')
 endfunction
 
 function! ShrinkPath(path)

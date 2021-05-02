@@ -28,7 +28,9 @@ if (empty($TMUX))
 endif
 
 set bg=dark
-colorscheme one
+" colorscheme one
+" colorscheme xcodedark
+colorscheme gotham256
 
 " show only an underline behind the matched words
 hi Search ctermbg=NONE ctermfg=NONE cterm=underline

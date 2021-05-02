@@ -83,10 +83,9 @@ else
   eval $( gpg-agent --daemon ~/.gpg-agent-info )
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/usr/local/bin/robomongo/bin:$PATH"
-
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+# export PATH="/usr/local/bin/robomongo/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -96,12 +95,10 @@ export PATH="/Users/umutsirin/Library/Python/3.6/bin:$PATH"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvim
 
-export PATH="/usr/local/lib/kubernetes/bin:$PATH"
-export PATH="/Users/umut.sirin/.deno/bin:$PATH"
-
 export GOPATH="$HOME/code/go"
 export PATH="${GOPATH//://bin:}/bin:$PATH"
 export PATH=$HOME/.toolbox/bin:$PATH
+export PATH="$HOME/code/twitch/isengard_credentials:$PATH"
 
 export GPG_TTY=$(tty)
 
@@ -120,9 +117,4 @@ export LC_TYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export HOMEBREW_GITHUB_API_TOKEN=3a5642b66456c8672621785b8b1f30e30716d656
 
-export GRAFANA_API_KEY=eyJrIjoicG5ja05YcWNWbnB0Tkg4bkV2anVTemxNM29IbFBNbkkiLCJuIjoiZnJvbnRlbmQiLCJpZCI6MX0
-export GRAFANA_SERVER=grafana.mysamba.tv
-export GRAFANA_PORT=443
-export GRAFANA_SECURE=1
-export GRAFANA_URL=https://grafana.mysamba.tv/api/annotations
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export AWS_DEFAULT_REGION=us-west-2

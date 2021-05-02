@@ -1,0 +1,12 @@
+#!/bin/sh
+LANG_SERVER_LUA_PATH=~/.config/language-servers/lua
+
+mkdir -p $LANG_SERVER_LUA_PATH
+git clone https://github.com/sumneko/lua-language-server $LANG_SERVER_LUA_PATH
+cd $LANG_SERVER_LUA_PATH
+git submodule update --init --recursive
+
+cd 3rd/luamake
+ninja -f ninja/macos.ninja
+cd ../..
+./3rd/luamake/luamake rebuild

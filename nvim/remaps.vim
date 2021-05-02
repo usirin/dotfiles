@@ -13,7 +13,7 @@ nnoremap ; :
 nnoremap <Enter> o<Esc>
 
 " Remove search highlight
-nnoremap <leader><space> :nohlsearch<cr><Plug>(coc-float-hide)<cr>
+nnoremap <leader><space> :nohlsearch \| call coc#float#close_all()<CR>
 
 " Shortcut for :b# (switch to alternate buffer)
 nnoremap <leader><leader> <c-^>
@@ -60,8 +60,8 @@ vmap <leader>a gcgv
 nnoremap <C-F>h :vert help<space>
 
 " open & close folds with tab & s-tab
-nnoremap <tab> zo
-nnoremap <s-tab> zc
+" nnoremap <tab> zo
+" nnoremap <s-tab> zc
 
 nnoremap <C-p> :ProjectRootExe Files<cr>
 nnoremap <C-t> :GFiles<cr>
@@ -76,9 +76,14 @@ map <leader>: :Tabularize /:<cr>
 map <leader>= :Tabularize /=<cr>
 map <leader>" :Tabularize /"<cr>
 
-nnoremap <leader>kb :VimFilerBufferDir -buffer-name=explorer -split -winwidth=35 -toggle -no-quit<cr>
+nnoremap <leader>kb :VimFilerBufferDir -buffer-name=explorer -auto-cd -split -winwidth=35 -no-quit<cr>
 
-nnoremap <leader>j :ProjectRootExe Term npx jest --findRelatedTests expand("%:p")<cr>
+nnoremap <leader>j :ProjectRootExe Term npx jest --findRelatedTests expand("%:p:h")<cr>
 
-nmap <leader>rn :call CocAction('rename')<cr>
+" nmap <leader>rn :call CocAction('rename')<cr>
+" nnoremap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 nmap Y y$
+
+nmap <leader>w <Plug>(coc-codeaction)
+vmap <leader>w <Plug>(coc-codeaction-selected)

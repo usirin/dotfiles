@@ -1,4 +1,4 @@
-"dein Scripts-----------------------------
+" Scripts-----------------------------
 
 " Required:
 call dein#begin(expand('~/.config/nvim/dein/'))
@@ -9,7 +9,6 @@ call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('Shougo/vimfiler.vim')
-call dein#add('Shougo/defx.nvim')
 call dein#add('neoclide/coc.nvim', {'merge':0, 'rev': 'release'})
 
 
@@ -37,31 +36,29 @@ call dein#add('neovim/node-host')
 call dein#add('mattn/emmet-vim')
 call dein#add('justinmk/vim-sneak')
 
-call dein#add('jxnblk/vim-mdx-js')
-
-call dein#add('fleischie/vim-styled-components')
-call dein#add('neoclide/vim-jsx-improve')
-call dein#add('jparise/vim-graphql')
-
 call dein#add('mrk21/yaml-vim')
 
 call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/denite.nvim')
+" call dein#add('Shougo/denite.nvim')
 
-call dein#add('joshdick/onedark.vim')
-call dein#add('rakr/vim-two-firewatch')
-call dein#add('rakr/vim-one')
+call dein#add('arzg/vim-colors-xcode')
+call dein#add('whatyouhide/vim-gotham')
 
 call dein#add('fatih/vim-go')
 call dein#add('honza/vim-snippets')
 
 call dein#add('nathanaelkane/vim-indent-guides')
-call dein#add('leafgarland/typescript-vim')
-call dein#add('jason0x43/vim-js-indent')
+" call dein#add('leafgarland/typescript-vim')
 call dein#add('HerringtonDarkholme/yats.vim')
 call dein#add('MaxMEllon/vim-jsx-pretty')
+" call dein#add('neoclide/vim-jsx-improve')
 
-call dein#add('OmniSharp/omnisharp-vim')
+" call dein#add('jason0x43/vim-js-indent')
+
+call dein#add('jxnblk/vim-mdx-js')
+" call dein#add('styled-components/vim-styled-components')
+" call dein#add('fleischie/vim-styled-components')
+call dein#add('jparise/vim-graphql')
 
 
 " Required:

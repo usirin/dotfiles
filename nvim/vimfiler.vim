@@ -12,6 +12,8 @@ let g:vimfiler_marked_file_icon = "✓"
 
 autocmd FileType vimfiler setlocal nonumber
 
+nnoremap <leader>kq <Plug>(vimfiler_hide)
+
 
 " open a vimfiler buffer automatically when Vim starts up if no
 " files(arguments) were specified

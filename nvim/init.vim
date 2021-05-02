@@ -25,15 +25,15 @@ function! s:LoadConfigs()
   source ~/dotfiles/nvim/rust.vim
   source ~/dotfiles/nvim/yaml.vim
   source ~/dotfiles/nvim/typescript.vim
-  source ~/dotfiles/nvim/denite.vim
+  " source ~/dotfiles/nvim/denite.vim
   source ~/dotfiles/nvim/fzf.vim
   source ~/dotfiles/nvim/fugitive.vim
   source ~/dotfiles/nvim/gist.vim
   source ~/dotfiles/nvim/lightline.vim
   source ~/dotfiles/nvim/sneak.vim
   source ~/dotfiles/nvim/vimfiler.vim
-  source ~/dotfiles/nvim/defx.vim
-  source ~/dotfiles/nvim/ctrlsf.vim
+  " source ~/dotfiles/nvim/defx.vim
+  " source ~/dotfiles/nvim/ctrlsf.vim
   source ~/dotfiles/nvim/indent-guides.vim
   source ~/dotfiles/nvim/gitgutter.vim
 
