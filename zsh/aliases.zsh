@@ -28,3 +28,6 @@ alias atom-beta='atom-beta --enable-gpu-rasterization'
 
 alias amp='amplify'
 
+# twitch
+alias bb='brazil-build'
+alias arbiter="~/code/twitch/arbiter-caller/env/bin/python ~/code/twitch/arbiter-caller/caller.py"
