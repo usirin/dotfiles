@@ -25,6 +25,10 @@ local prompt_git_color="%{$FG[010]%}"
 # local prompt_git_color=$fg[white]$clr_bg_grass
 local prompt_prompt_color=$clr_blonde
 
+if [ "$SSH_CONNECTION" ]; then
+  prompt_prompt_color=$clr_shadow
+fi
+
 local prompt_git_dirty_color=$clr_blonde
 local prompt_git_clean_color=$clr_grass
 
@@ -54,5 +58,14 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%} ${ret_git_dirty}%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%} ${ret_git_clean}%{$reset_color%}"
 
-PROMPT='${prompt_pwd_color}$(_fishy_collapsed_wd)$(git_prompt_info)% %{$reset_color%}${new_line}${ret_prompt}%{$reset_color%}'
+local _usirin_prompt='${prompt_pwd_color}$(_fishy_collapsed_wd)$(git_prompt_info)% %{$reset_color%}${new_line}${ret_prompt}%{$reset_color%}'
 
+_hostname() {
+  hostname
+}
+
+if [ "$SSH_CONNECTION" ]; then
+  _usirin_prompt="${prompt_prompt_color}$(hostname):${_usirin_prompt}"
+fi
+
+PROMPT=$_usirin_prompt
