@@ -35,7 +35,7 @@ local prompt_git_clean_color=$clr_grass
 local prompt_git_dirty="✗"
 local prompt_git_clean="✓"
 
-local prompt_prompt="❯ "
+local prompt_prompt=" "
 
 # borrowed from:
 # https://github.com/robbyrussell/oh-my-zsh/blob/b15918d414f255f8d2b36c99a338f930d7431b21/themes/fishy.zsh-theme#L3-L10

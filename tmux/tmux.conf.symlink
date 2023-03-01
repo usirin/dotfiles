@@ -1,7 +1,7 @@
+set-option -g default-terminal "screen-256color"
+
 set -g default-command "reattach-to-user-namespace -l zsh"
 # set -g default-shell /usr/bin/zsh
-
-set-option -g default-terminal "screen-256color"
 
 set -g history-limit 20000
 
@@ -127,9 +127,9 @@ bind C-v run "tmux set-buffer $(reattach-to-user-namespace pbpaste); tmux paste-
 source ~/dotfiles/tmux/theme-bleed-purple.sh
 
 # so that nvim can show pipe in insert mode as cursor shape.
-# set -g -a terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
 # set-option -ga terminal-overrides ',xterm-256color:Tc'
 
+set -ga terminal-overrides ',xterm-kitty:RGB,*:Ss=\E[%p1%d q:Se=\E[2 q'
 
 # Tmux Plugin Manager list of plugins
 set -g @plugin 'tmux-plugins/tpm'

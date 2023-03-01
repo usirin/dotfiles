@@ -1,0 +1,24 @@
+antigen use oh-my-zsh
+
+# antigen bundle git
+antigen bundle brew
+antigen bundle npm
+antigen bundle command-not-found
+antigen bundle docker
+antigen bundle aws
+antigen bundle z
+
+export NVM_AUTO_USE=true
+export NVM_LAZY_LOAD=true
+antigen bundle lukechilds/zsh-nvm
+
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+
+# antigen bundle g-plane/zsh-yarn-autocompletions
+
+antigen bundle $DOTFILES/zsh
+
+antigen theme $DOTFILES/zsh themes/usirin
+
+antigen apply

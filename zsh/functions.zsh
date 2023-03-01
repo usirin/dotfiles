@@ -134,3 +134,125 @@ kill-tunnel () {
 gitroot () {
   git rev-parse --show-toplevel
 }
+
+wsuse() {
+  NAME=$1
+  echo "${NAME}"
+  brazil workspace use \
+    -p "${NAME}" \
+    -p "${NAME}"CDK \
+    -p "${NAME}"Twirp\
+    -p "${NAME}"Schema \
+    -p "${NAME}"ClientConfig \
+    -vs "${NAME}"/development && \
+  brazil setup platform-support
+}
+
+create-badge() {
+  local small=$1
+  local medium=$2
+  local big=$3
+  local folder=$4
+
+  export UUID=$(uuidgen)
+
+  echo "${UUID}"
+  echo "${small}"
+  echo "${medium}"
+  echo "${big}"
+
+  mkdir $folder
+  cp $small ${folder}/badge-${UUID}-1.png
+  cp $medium ${folder}/badge-${UUID}-2.png
+  cp $big ${folder}/badge-${UUID}-3.png
+}
+
+upload-badge-staging() {
+  local UUID=$1
+
+  echo "${UUID}"
+  l badge-${UUID}-1.png
+  l badge-${UUID}-2.png
+  l badge-${UUID}-3.png
+
+  AWS_PROFILE=twitch-chat-aws aws s3api put-object --bucket twitch-chat-badges-staging --key badge-${UUID}-1.png --body badge-${UUID}-1.png --acl public-read
+  AWS_PROFILE=twitch-chat-aws aws s3api put-object --bucket twitch-chat-badges-staging --key badge-${UUID}-2.png --body badge-${UUID}-2.png --acl public-read
+  AWS_PROFILE=twitch-chat-aws aws s3api put-object --bucket twitch-chat-badges-staging --key badge-${UUID}-3.png --body badge-${UUID}-3.png --acl public-read
+}
+
+download-badge-staging() {
+  local UUID=$1
+  echo "${UUID}"
+
+  AWS_PROFILE=twitch-chat-aws aws s3api get-object --bucket twitch-chat-badges-staging --key badge-${UUID}-1.png s3.small.png
+  AWS_PROFILE=twitch-chat-aws aws s3api get-object --bucket twitch-chat-badges-staging --key badge-${UUID}-2.png s3.medium.png
+  AWS_PROFILE=twitch-chat-aws aws s3api get-object --bucket twitch-chat-badges-staging --key badge-${UUID}-3.png s3.big.png
+}
+
+create-badge-info-staging() {
+
+  local UUID=$1
+  echo "${UUID}"
+
+  AWS_PROFILE=twitch-chat-aws aws dynamodb put-item --region us-west-1 --table-name badges_staging_1_badge_display_info --item '{
+  "badge_set": {
+    "S": "no_visual:1"
+  },
+  "click_action": {
+    "S": "none"
+  },
+  "description_EN": {
+    "S": "Individuals with unreliable or no visuals can select this badge"
+  },
+  "scope": {
+    "S": "global.all"
+  },
+  "image_id": {
+    "S": "641E2528-CC09-4141-BCE8-001E36284112"
+  },
+  "title_EN": {
+    "S": "No video"
+  }
+}'
+}
+
+upload-badge-prod() {
+  local UUID=$1
+
+  echo "${UUID}"
+  l badge-${UUID}-1.png
+  l badge-${UUID}-2.png
+  l badge-${UUID}-3.png
+
+  AWS_PROFILE=twitch-chat-aws aws s3api put-object --bucket twitch-chat-badges --key badge-${UUID}-1.png --body badge-${UUID}-1.png --acl public-read
+  AWS_PROFILE=twitch-chat-aws aws s3api put-object --bucket twitch-chat-badges --key badge-${UUID}-2.png --body badge-${UUID}-2.png --acl public-read
+  AWS_PROFILE=twitch-chat-aws aws s3api put-object --bucket twitch-chat-badges --key badge-${UUID}-3.png --body badge-${UUID}-3.png --acl public-read
+
+}
+
+
+rot13 () { tr 'A-Za-z' 'N-ZA-Mn-za-m' <<< $1 }
+
+list-enabled-alarms () {
+  local prefix=$1
+  aws cloudwatch describe-alarms --alarm-name-prefix "$prefix-" | jq '.MetricAlarms[] | select(.ActionsEnabled == true) | "\(.AlarmName)"'
+}
+
+disable-alarms () {
+  # aws cloudwatch disable-alarm-actions --alarm-names $@
+  echo $@
+  aws cloudwatch describe-alarms --alarm-names $@
+}
+
+disable-enabled-alarms () {
+  list-enabled-alarms $1 | xargs aws cloudwatch disable-alarm-actions --alarm-names
+}
+
+patch-font () {
+  docker run --rm -v $1:/in -v $2:/out nerdfonts/patcher -s -c
+}
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}

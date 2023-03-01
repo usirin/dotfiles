@@ -1,5 +1,6 @@
 # make sure zsh config is loaded
-alias r!='source ~/.zshrc'
+alias r!='exec zsh'
+alias g="git"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -23,11 +24,7 @@ alias l="ls -lahF ${colorflag}"
 alias s='supervisorctl'
 alias n='npm'
 alias y='yarn'
-
-alias atom-beta='atom-beta --enable-gpu-rasterization'
-
-alias amp='amplify'
+alias ng='nvim +0G'
 
 # twitch
 alias bb='brazil-build'
-alias arbiter="~/code/twitch/arbiter-caller/env/bin/python ~/code/twitch/arbiter-caller/caller.py"

@@ -1,6 +1,6 @@
 [user]
-	name = usirin
-	email = umutsirin1@gmail.com
+	name = ussirin
+	email = ussirin@twitch.tv
 
 [alias]
   st = status --untracked-files
@@ -63,7 +63,7 @@
 ; [commit]
 ; 	gpgsign = true
 [gpg]
-	program = /usr/local/bin/gpg
+	program = /opt/homebrew/bin/gpg
 [rebase]
 	autostash = true
 ; [credential]
@@ -83,3 +83,9 @@
 ; 	insteadOf = https://github.com/
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
+[includeIf "gitdir:~/code/github.com/"]
+  path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/yux-brain/"]
+  path = ~/.gitconfig-personal
