@@ -1,28 +1,49 @@
 #!/usr/bin/env sh
 # vi: ft=sh
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
 
 # float system preferences
 yabai -m rule --add app='^System Information$' manage=off
 yabai -m rule --add app='^System Preferences$' manage=off
 yabai -m rule --add title='Preferences$' manage=off
 
+# float apps
+yabai -m rule --add title='Telegram$' manage=off
+yabai -m rule --add app='Messages$' manage=off
+yabai -m rule --add app='Farrago$' manage=off
+yabai -m rule --add app='Loopback$' manage=off
+yabai -m rule --add app='Battle\.net$' manage=off
+yabai -m rule --add app='Spotify' manage=off
+yabai -m rule --add app='Discord' manage=off
+
 # general space settings
 yabai -m config layout         bsp
 
-yabai -m config top_padding    10
-yabai -m config bottom_padding 10
-yabai -m config left_padding   10
-yabai -m config right_padding  10
+yabai -m config window_shadow float
+yabai -m config window_opacity off
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 0.95
 
-yabai -m config window_gap     10
+yabai -m config top_padding    52
+yabai -m config bottom_padding 20
+yabai -m config left_padding   20
+yabai -m config right_padding  20
+yabai -m config window_gap     20
 
 # mouse things
-yabai -m config mouse_modifier alt
-yabai -m config mouse_action1  move
-yabai -m config mouse_action2  resize
+# yabai -m config mouse_modifier alt
+# yabai -m config mouse_action1  move
+# yabai -m config mouse_action2  resize
 
-# yabai -m config window_border                on
-# yabai -m config window_border_width          6
-# yabai -m config active_window_border_color   0xff775759
-# yabai -m config normal_window_border_color   0xff555555
-# yabai -m config insert_feedback_color        0xaad75f5f
+yabai -m config status_bar                off
+
+yabai -m config window_border                on
+yabai -m config window_border_width          5
+yabai -m config window_border_hidpi          on
+# yabai -m config window_border_radius         10
+# yabai -m config window_border_placement      inset
+yabai -m config active_window_border_color   0xffdd75e6
+# yabai -m config active_window_border_color   0xff9147ff
+yabai -m config normal_window_border_color   0x55aaaaaa
+yabai -m config insert_feedback_color        0xaad75f5f
